@@ -41,7 +41,7 @@ def load_labels(labels_path: Path) -> dict:
 
 
 def run_detector(images_dir: Path, bp_dir: Path, labels_path: Path, beta: float, output_path: Path,
-                 shuffle_bp: bool = False, no_rotation: bool = False):
+                 no_rotation: bool = False):
     print(f"Loading BP patterns from {bp_dir} ...")
     P_mat, meta = build_P_mat_from_mat_folder(bp_dir)
     print(f"  {len(meta)} BP variants loaded (including rotations)")
@@ -51,12 +51,6 @@ def run_detector(images_dir: Path, bp_dir: Path, labels_path: Path, beta: float,
         P_mat = P_mat[:, keep]
         meta = [meta[i] for i in keep]
         print(f"  [NO-ROTATION BASELINE] Chỉ dùng 0° — bỏ qua 90°/180°/270° ({len(meta)} variants còn lại)")
-
-    if shuffle_bp:
-        rng = np.random.default_rng(42)
-        for i in range(P_mat.shape[1]):
-            rng.shuffle(P_mat[:, i])
-        print("  [WRONG-BP CONTROL] Tất cả BP đã bị shuffle — spatial structure bị phá huỷ")
 
     images = sorted(p for p in images_dir.iterdir() if p.suffix.lower() in SUPPORTED)
     labels = load_labels(labels_path)
@@ -111,14 +105,12 @@ def main():
     parser.add_argument("--labels", default="data/labels.csv", help="Ground truth labels CSV")
     parser.add_argument("--beta", type=float, default=0.0072, help="Detection threshold β (default: 0.0072)")
     parser.add_argument("--output", required=True, help="Output CSV path")
-    parser.add_argument("--shuffle-bp", action="store_true",
-                        help="Wrong-BP control: shuffle spatial structure of all BPs before correlation")
     parser.add_argument("--no-rotation", action="store_true",
                         help="No-rotation baseline: only test BP at 0°, skip 90°/180°/270°")
     args = parser.parse_args()
 
     run_detector(Path(args.images), Path(args.bp), Path(args.labels), args.beta, Path(args.output),
-                 shuffle_bp=args.shuffle_bp, no_rotation=args.no_rotation)
+                 no_rotation=args.no_rotation)
 
 
 if __name__ == "__main__":

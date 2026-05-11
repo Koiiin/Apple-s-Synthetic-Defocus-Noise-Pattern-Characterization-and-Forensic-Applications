@@ -12,13 +12,11 @@ results/original/*
 results/exif_stripped/*
 results/recompressed/*
 results/resized/*
-results/wrong_bp_control/*
 results/no_rotation_control/*
 !results/original/.gitkeep
 !results/exif_stripped/.gitkeep
 !results/recompressed/.gitkeep
 !results/resized/.gitkeep
-!results/wrong_bp_control/.gitkeep
 !results/no_rotation_control/.gitkeep
 
 # Python
@@ -38,3 +36,4 @@ apple-sdnp-overview.md
 *.swp
 CLAUDE.md
 plan.md
+RUBRIC.md

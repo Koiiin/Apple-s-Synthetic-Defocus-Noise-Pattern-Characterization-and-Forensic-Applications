@@ -14,9 +14,5 @@ python src/evaluate.py --pred "$OUT/sdnp_results.csv" --baseline "results/exif_b
 python src/report_case.py --manifest "$OUT/manifest.csv" --pred "$OUT/sdnp_results.csv" --baseline "results/exif_baseline.csv" --output "$OUT/"
 
 echo ""
-echo "=== Wrong-BP Control ==="
-bash scripts/run_wrong_bp.sh
-
-echo ""
 echo "=== No-Rotation Baseline ==="
 bash scripts/run_no_rotation.sh
