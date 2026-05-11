@@ -1,0 +1,40 @@
+# Images
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# BP .mat files 
+data/bp/*.mat
+
+# Results 
+results/original/*
+results/exif_stripped/*
+results/recompressed/*
+results/resized/*
+results/wrong_bp_control/*
+results/no_rotation_control/*
+!results/original/.gitkeep
+!results/exif_stripped/.gitkeep
+!results/recompressed/.gitkeep
+!results/resized/.gitkeep
+!results/wrong_bp_control/.gitkeep
+!results/no_rotation_control/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Paper files 
+paper.md
+paper.pdf
+apple-sdnp-overview.md
+
+# Misc
+.DS_Store
+*.swp
+CLAUDE.md
+plan.md
