@@ -13,7 +13,7 @@ Dự án phân tích nhiễu giả lập **SDNP** trong chế độ chụp Chân
 - Định vị vùng bokeh giả (localization)
 - Đánh giá ảnh hưởng của SDNP đến kỹ thuật xác thực nguồn gốc camera (**PRNU**)
 
-Pipeline mở rộng repo chính thức bằng: chain-of-custody manifest, EXIF baseline, robustness experiment, wrong-BP control, metrics đầy đủ, và forensic case report.
+Pipeline mở rộng repo chính thức bằng: chain-of-custody manifest, EXIF baseline, robustness experiment, metrics đầy đủ, và forensic case report.
 
 ---
 
@@ -25,7 +25,6 @@ Pipeline mở rộng repo chính thức bằng: chain-of-custody manifest, EXIF 
 - Xây dựng detector phát hiện ảnh Apple Portrait Mode bằng Base Pattern (BP)
 - So sánh với EXIF baseline (CustomRendered tag) — thất bại khi EXIF bị xoá
 - Đánh giá độ bền (robustness) khi ảnh bị strip EXIF / recompress / resize
-- Chứng minh detector không fire ngẫu nhiên (wrong-BP control)
 
 ---
 
@@ -55,7 +54,7 @@ pip install -r requirements.txt
 │   ├── evaluate.py             ← Metrics: Acc, Prec, Recall, F1, FPR, AUC
 │   └── report_case.py          ← Forensic case report (JSON + Markdown)
 ├── scripts/
-│   ├── run_original.sh         ← Pipeline chính + wrong-BP control
+│   ├── run_original.sh         ← Pipeline chính + no-rotation baseline
 │   ├── run_robustness.sh       ← Robustness experiment
 │   └── reproduce_all.sh        ← Chạy toàn bộ
 ├── data/
@@ -64,27 +63,39 @@ pip install -r requirements.txt
 │   ├── processed/              ← Ảnh sau transform (không commit)
 │   └── bp/                     ← BP .mat files (không commit — tải từ repo gốc)
 ├── results/                    ← Output của pipeline (không commit)
-├── deliverables/
-│   ├── report/                 ← LaTeX report
-│   └── slides/                 ← Presentation
-├── paper.md                    ← Technical summary của paper
-└── paper.pdf                   ← PDF gốc arXiv
+└── deliverables/
+    ├── report/                 ← LaTeX report
+    └── slides/                 ← Presentation
 ```
 
 ---
 
 ## 🚀 Quy trình thực hiện (Pipeline)
 
-```
-Ảnh nghi vấn
-  → SHA-256 manifest (chain of custody)
-  → EXIF baseline (CustomRendered tag)
-  → Luminance → Residual (image - box_filter)
-  → NCC với tất cả BP, 4 rotations (0°/90°/180°/270°)
-  → rho_max > β (0.0072) → DETECTED
-  → Localization: sliding NCC map → binary mask
-  → Evaluate: Acc / Prec / Recall / F1 / FPR / AUC
-  → Forensic case report
+```mermaid
+flowchart TD
+    A["📷 Ảnh nghi vấn"] --> B
+
+    B["SHA-256 Hash\nChain-of-Custody Manifest\nforensic_manifest.py"] --> C & D
+
+    C["EXIF Baseline\nCustomRendered tag?\nexif_baseline.py"] -->|Portrait / Portrait HDR| P1["EXIF: DETECTED"]
+    C -->|Không có / bị xoá| P2["EXIF: NOT DETECTED"]
+
+    D["Luminance channel\nResidual: W = I − box_filter(I, 5×5)\nsdnp_detector.py"] --> E
+
+    E["NCC với BP variants\n× 4 rotations: 0° / 90° / 180° / 270°"] --> F
+
+    F{"ρ_max > β = 0.0072?"}
+    F -->|Có| G["BP: DETECTED\nApple Portrait Mode"]
+    F -->|Không| H["BP: NOT DETECTED"]
+
+    G --> I["Localization\nNCC map → Binary Mask\nsdnp_localizer.py"]
+
+    P1 & P2 & G & H & I --> J
+
+    J["Evaluate\nevaluate.py\nAcc / Prec / Recall / F1 / FPR / AUC"] --> K
+
+    K["Forensic Case Report\nreport_case.py\nJSON + Markdown"]
 ```
 
 **Chuẩn bị dữ liệu:** đặt ảnh vào `data/raw/`, điền `data/labels.csv`:
@@ -114,7 +125,6 @@ bash scripts/reproduce_all.sh
 | EXIF stripped | — | — | — | — | — |
 | JPEG Q80 | — | — | — | — | — |
 | Resize 0.5 | — | — | — | — | — |
-| Wrong-BP control | — | — | — | — | — |
 | No-rotation baseline | — | — | — | — | — |
 | EXIF baseline | — | — | — | — | — |
 
