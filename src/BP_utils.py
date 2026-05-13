@@ -244,7 +244,12 @@ def detect_BP(BP_path, path_to_im, beta=0.0072):
 
         # Check detection threshold
         if rho > beta:
-            print(f"[info]: BP: {meta[index]["BP_ref"]} (rot_index: {meta[index]["rotation_k"]}) in: {im_fp} (rho: {rho:.3f})")
+            print(
+                f"[info]: BP: {meta[index]['BP_ref']} "
+                f"(rot_index: {meta[index]['rotation_k']}) "
+                f"in: {im_fp} (rho: {rho:.3f})"
+            )
+
             meta_det_BP.append(
                 {
                     "Filename": im_fp,
@@ -255,6 +260,7 @@ def detect_BP(BP_path, path_to_im, beta=0.0072):
             )
         else:
             print(f"[info]: No BP has been detected in: {im_fp} (rho: {rho:.4f})")
+
             meta_det_BP.append(
                 {
                     "Filename": im_fp,
@@ -318,7 +324,7 @@ def BP_detection_and_localization_example(BP_path, im_path):
             plt.colorbar(im, cax=cax, label='NCC')
 
             # Show correlation score
-            ax.set_title(f"rho: {meta["rho"]:.3f}")
+            ax.set_title(f"rho: {meta['rho']:.3f}")
 
             ax.set_axis_off()
             plt.show()

@@ -26,7 +26,7 @@ def load_labels(labels_path: Path) -> dict:
     labels = {}
     if not labels_path.exists():
         return labels
-    with open(labels_path, newline="") as f:
+    with open(labels_path, newline="", encoding="utf-8-sig") as f:
         for row in csv.DictReader(f):
             labels[row["filename"]] = row
     return labels
@@ -34,7 +34,7 @@ def load_labels(labels_path: Path) -> dict:
 
 def build_manifest(input_dir: Path, labels_path: Path, output_path: Path):
     labels = load_labels(labels_path)
-    images = sorted(p for p in input_dir.iterdir() if p.suffix.lower() in SUPPORTED)
+    images = sorted(p for p in input_dir.rglob("*") if p.is_file() and p.suffix.lower() in SUPPORTED)
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", newline="") as f:
