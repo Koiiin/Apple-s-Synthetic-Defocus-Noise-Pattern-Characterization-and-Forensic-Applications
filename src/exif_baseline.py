@@ -56,7 +56,7 @@ def read_make_model(path: Path) -> tuple[str, str]:
 
 
 def run_exif_baseline(input_dir: Path, output_path: Path):
-    images = sorted(p for p in input_dir.iterdir() if p.suffix.lower() in SUPPORTED)
+    images = sorted(p for p in input_dir.rglob("*") if p.is_file() and p.suffix.lower() in SUPPORTED)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     with open(output_path, "w", newline="") as f:
@@ -67,7 +67,7 @@ def run_exif_baseline(input_dir: Path, output_path: Path):
             cr = read_custom_rendered(img)
             pred = 1 if (cr and cr in PORTRAIT_CR_VALUES) else 0
             writer.writerow({
-                "filename": img.name,
+                "filename": str(img.relative_to(input_dir)),
                 "exif_make": make,
                 "exif_model": model,
                 "custom_rendered": cr or "",
