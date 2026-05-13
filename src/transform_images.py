@@ -64,7 +64,10 @@ def process_image(img_path: Path, output_dir: Path, strip_exif: bool, jpeg_quali
 
 
 def run_transform(input_dir: Path, output_dir: Path, strip_exif: bool, jpeg_quality: int | None, resize_scale: float | None):
-    images = sorted(p for p in input_dir.iterdir() if p.suffix.lower() in SUPPORTED)
+    images = sorted(
+        p for p in input_dir.rglob("*")
+        if p.is_file() and p.suffix.lower() in SUPPORTED
+    )
     output_dir.mkdir(parents=True, exist_ok=True)
 
     ops = []
