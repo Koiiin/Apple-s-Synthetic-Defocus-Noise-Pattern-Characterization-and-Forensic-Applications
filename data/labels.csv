@@ -1,235 +1,101 @@
-﻿filename,label,source,notes,device_make,device_model,os_version
-iphone_11_iOS_16-1.jpg,,Back_camera,,APPLE,IPHONE-11,16.1
-iphone_11_iOS_18-7.heic,,Back_camera,,APPLE,IPHONE-11,18.7
-iphone_11_iOS_18-7.jpg,,Back_camera,,APPLE,IPHONE-11,18.7
-iphone_11_pro_iOS_18-7.heic,,Back_camera,,APPLE,IPHONE-11-PRO,18.7
-iphone_12_promax_iOS_18-3-1.jpg,,Back_camera,,APPLE,IPHONE-12-PROMAX,18.3.1
-iphone_13_iOS_18-7.heic,,Back_camera,,APPLE,IPHONE-13,18.7
-iphone_14_promax_iOS_26-4-2.jpg,,Back_camera,,APPLE,IPHONE-14-PROMAX,26.4.2
-iphone_15_iOS_17-6-1.heic,,Back_camera,,APPLE,IPHONE-15,17.6.1
-iphone_15_iOS_17-6-1.jpg,,Back_camera,,APPLE,IPHONE-15,17.6.1
-iphone_11_iOS_16-1.heic,,Selfie_camera,,APPLE,IPHONE-11,16.1
-iphone_11_promax_iOS_18-6-2.heic,,Selfie_camera,,APPLE,IPHONE-11-PROMAX,18.6.2
-iphone_15_iOS_18-7.heic,,Selfie_camera,,APPLE,IPHONE-15,18.7
-vivo.jpg,,Back_camera,,Unknown,Unknown
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,MAR-LX1A,MAR-L21A 9.1.0.317(C431E6R2P3)
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,MAR-LX1A,MAR-L21A 9.1.0.317(C431E6R2P3)
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,MAR-LX1A,MAR-L21A 9.1.0.317(C431E6R2P3)
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,MAR-LX1A,MAR-L21A 9.1.0.317(C431E6R2P3)
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,MAR-LX1A,MAR-L21A 9.1.0.317(C431E6R2P3)
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,MAR-LX1A,MAR-L21A 9.1.0.317(C431E6R2P3)
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,MAR-LX1A,MAR-L21A 9.1.0.317(C431E6R2P3)
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,MAR-LX1A,MAR-L21A 9.1.0.317(C431E6R2P3)
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,MAR-LX1A,MAR-L21A 9.1.0.317(C431E6R2P3)
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,MAR-LX1A,MAR-L21A 9.1.0.317(C431E6R2P3)
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L09,CLT-L09 9.1.0.372(C781E11R1P11)
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L09,CLT-L09 9.1.0.372(C781E11R1P11)
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L09,CLT-L09 9.1.0.372(C781E11R1P11)
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L09,CLT-L09 9.1.0.372(C781E11R1P11)
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L09,CLT-L09 9.1.0.372(C781E11R1P11)
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L09,CLT-L09 9.1.0.372(C781E11R1P11)
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L09,CLT-L09 9.1.0.372(C781E11R1P11)
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L09,CLT-L09 9.1.0.372(C781E11R1P11)
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L09,CLT-L09 9.1.0.372(C781E11R1P11)
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L09,CLT-L09 9.1.0.372(C781E11R1P11)
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,CLT-L29,CLT-L29 9.1.0.387(C432E8R1P11)
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,POT-LX1,POT-LX1 10.0.0.179(C431E3R4P1)
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,ANE-LX1,ANE-LX1 9.1.0.306(C432E6R1P7)
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,VTR-L09,VTR-L09 9.1.0.252(C432E1R1P9)
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,VTR-L09,VTR-L09 9.1.0.252(C432E1R1P9)
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,VTR-L09,VTR-L09 9.1.0.252(C432E1R1P9)
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,VTR-L09,VTR-L09 9.1.0.252(C432E1R1P9)
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,VTR-L09,VTR-L09 9.1.0.252(C432E1R1P9)
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,VTR-L09,VTR-L09 9.1.0.252(C432E1R1P9)
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,VTR-L09,VTR-L09 9.1.0.252(C432E1R1P9)
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,VTR-L09,VTR-L09 9.1.0.252(C432E1R1P9)
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,VTR-L09,VTR-L09 9.1.0.252(C432E1R1P9)
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,HUAWEI,VTR-L09,VTR-L09 9.1.0.252(C432E1R1P9)
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi Note 10,Unknown
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi Note 10,Unknown
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi Note 10,Unknown
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi Note 10,Unknown
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi Note 10,Unknown
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi Note 10,Unknown
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi Note 10,Unknown
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi Note 10,Unknown
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi Note 10,Unknown
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi Note 10,Unknown
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Redmi Note 8T,willow-user 9 PKQ1.190616.001 V11.0.7.0.PCXEUXM release-keys
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Redmi Note 8T,willow-user 9 PKQ1.190616.001 V11.0.7.0.PCXEUXM release-keys
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Redmi Note 8T,willow-user 9 PKQ1.190616.001 V11.0.7.0.PCXEUXM release-keys
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Redmi Note 8T,willow-user 9 PKQ1.190616.001 V11.0.7.0.PCXEUXM release-keys
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Redmi Note 8T,willow-user 9 PKQ1.190616.001 V11.0.7.0.PCXEUXM release-keys
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Redmi Note 8T,willow-user 9 PKQ1.190616.001 V11.0.7.0.PCXEUXM release-keys
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Redmi Note 8T,willow-user 9 PKQ1.190616.001 V11.0.7.0.PCXEUXM release-keys
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Redmi Note 8T,willow-user 9 PKQ1.190616.001 V11.0.7.0.PCXEUXM release-keys
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Redmi Note 8T,willow-user 9 PKQ1.190616.001 V11.0.7.0.PCXEUXM release-keys
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Redmi Note 8T,willow-user 9 PKQ1.190616.001 V11.0.7.0.PCXEUXM release-keys
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi A3,laurel_sprout-user 9 PKQ1.190416.001 V10.3.17.0.PFQEUXM release-keys
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi A3,laurel_sprout-user 9 PKQ1.190416.001 V10.3.17.0.PFQEUXM release-keys
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi A3,laurel_sprout-user 9 PKQ1.190416.001 V10.3.17.0.PFQEUXM release-keys
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi A3,laurel_sprout-user 9 PKQ1.190416.001 V10.3.17.0.PFQEUXM release-keys
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi A3,laurel_sprout-user 9 PKQ1.190416.001 V10.3.17.0.PFQEUXM release-keys
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi A3,laurel_sprout-user 9 PKQ1.190416.001 V10.3.17.0.PFQEUXM release-keys
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi A3,laurel_sprout-user 9 PKQ1.190416.001 V10.3.17.0.PFQEUXM release-keys
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi A3,laurel_sprout-user 9 PKQ1.190416.001 V10.3.17.0.PFQEUXM release-keys
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi A3,laurel_sprout-user 9 PKQ1.190416.001 V10.3.17.0.PFQEUXM release-keys
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,Xiaomi,Mi A3,laurel_sprout-user 9 PKQ1.190416.001 V10.3.17.0.PFQEUXM release-keys
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G920F,G920FXXU6ERF5
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G920F,G920FXXU6ERF5
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G920F,G920FXXU6ERF5
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G920F,G920FXXU6ERF5
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G920F,G920FXXU6ERF5
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G920F,G920FXXU6ERF5
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G920F,G920FXXU6ERF5
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G920F,G920FXXU6ERF5
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G920F,G920FXXU6ERF5
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G920F,G920FXXU6ERF5
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G960F,G960FXXS7DTB5
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G960F,G960FXXS7DTB5
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G960F,G960FXXS7DTB5
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G960F,G960FXXS7DTB5
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G960F,G960FXXS7DTB5
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G960F,G960FXXS7DTB5
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G960F,G960FXXS7DTB5
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G960F,G960FXXS7DTB5
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G960F,G960FXXS7DTB5
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G960F,G960FXXS7DTB5
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G965F,G965FXXS7CSK4
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G965F,G965FXXS7CSK4
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G965F,G965FXXS7CSK4
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G965F,G965FXXS7CSK4
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G965F,G965FXXS7CSK4
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G965F,G965FXXS7CSK4
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G965F,G965FXXS7CSK4
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G965F,G965FXXS7CSK4
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G965F,G965FXXS7CSK4
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-G965F,G965FXXS7CSK4
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-A705F,A705FXXU5BTC2
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-A705F,A705FXXU5BTC2
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-A705F,A705FXXU5BTC2
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-A705F,A705FXXU5BTC2
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-A705F,A705FXXU5BTC2
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-A705F,A705FXXU5BTC2
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-A705F,A705FXXU5BTC2
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-A705F,A705FXXU5BTC2
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-A705F,A705FXXU5BTC2
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,samsung,SM-A705F,A705FXXU5BTC2
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6013,Unknown
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6013,Unknown
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6013,Unknown
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6013,Unknown
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6013,Unknown
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6013,Unknown
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6013,Unknown
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6013,Unknown
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6013,Unknown
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6013,Unknown
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6003,Unknown
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6003,Unknown
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6003,Unknown
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6003,Unknown
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6003,Unknown
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6003,Unknown
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6003,Unknown
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6003,Unknown
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6003,Unknown
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,OnePlus,ONEPLUS A6003,Unknown
-01 (1).jpg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone X,13.4.1
-01 (2).jpg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone X,13.4.1
-01 (3).jpg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone X,13.4.1
-01 (4).jpg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone X,13.4.1
-01 (5).jpg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone X,13.4.1
-01 (6).jpg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone X,13.4.1
-01 (7).jpg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone X,13.4.1
-01 (8).jpg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone X,13.4.1
-01 (9.0).jpg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11 Pro Max,13.4
-01 (9.1).jpg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11 Pro Max,13.4
-01 (1).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.4.1
-01 (2).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.4.1
-01 (3).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.4.1
-01 (4).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.4.1
-01 (5).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.4.1
-01 (6).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.4.1
-01 (7).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.4.1
-01 (8).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.4.1
-01 (9.0).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.4.1
-01 (9.1).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.4.1
-01 (1).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.3.1
-01 (2).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.3.1
-01 (3).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.3.1
-01 (4).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.3.1
-01 (5).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.3.1
-01 (6).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.3.1
-01 (7).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.3.1
-01 (8).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.3.1
-01 (9.0).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.3.1
-01 (9.1).JPG,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11,13.3.1
-01 (1).jpeg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11 Pro Max,13.4
-01 (2).jpeg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11 Pro Max,13.4
-01 (3).jpeg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11 Pro Max,13.4
-01 (4).jpeg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11 Pro Max,13.4
-01 (5).jpeg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11 Pro Max,13.4
-01 (6).jpeg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11 Pro Max,13.4
-01 (7).jpeg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11 Pro Max,13.4
-01 (8).jpeg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11 Pro Max,13.4
-01 (9.0).jpeg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11 Pro Max,13.4
-01 (9.1).jpeg,,Puclic_Source,Folder: PrnuModernDevices,Apple,iPhone 11 Pro Max,13.4
-
+filename,label,source,notes
+00002PORTRAIT_00002_BURST20170722111600.jpg,1,Dataset,OS: HDR+ 1.0.162691864z | Path: .
+00002PORTRAIT_00002_BURST494751013071025.jpg,1,Dataset,OS: HDR+ 1.0.160652830z | Path: .
+00003sPORTRAIT_00003_BURST20170916214045913.jpg,1,Dataset,OS: HDR+ 1.0.168898851z | Path: .
+00100dPORTRAIT_00100_BURST20170819214801828_COVER.jpg,1,Dataset,OS: HDR+ 1.0.165786234z | Path: .
+00100dPORTRAIT_00100_BURST20170820184002747_COVER.jpg,1,Dataset,OS: HDR+ 1.0.165786234z | Path: .
+00100dPORTRAIT_00100_BURST20170914121422905_COVER (1).jpg,1,Dataset,OS: HDR+ 1.0.168694120z | Path: .
+00100dPORTRAIT_00100_BURST20170924123155135_COVER.jpg,1,Dataset,OS: Google | Path: .
+00100dPORTRAIT_00100_BURST20170930171441158_COVER.jpg,1,Dataset,OS: HDR+ 1.0.168876838z | Path: .
+00100dPORTRAIT_00100_BURST20171001184930679_COVER.jpg,1,Dataset,OS: HDR+ 1.0.170380794z | Path: .
+00100dPORTRAIT_00100_BURST20171013233121374_COVER.jpg,1,Dataset,OS: HDR+ 1.0.171970593z | Path: .
+00100dPORTRAIT_00100_BURST20171014154347382_COVER.jpg,1,Dataset,OS: HDR+ 1.0.171970593z | Path: .
+00100dPORTRAIT_00100_BURST20171014234026160_COVER.jpg,1,Dataset,OS: HDR+ 1.0.171970593z | Path: .
+01 (1).jpg,1,Dataset,OS: Unknown | Path: .
+01 (1)_1.jpg,1,Dataset,OS: G960FXXS7DTB5 | Path: .
+01 (1)_2.jpg,1,Dataset,OS: G965FXXS7CSK4 | Path: .
+01 (1)_3.jpg,1,Dataset,OS: A705FXXU5BTC2 | Path: .
+01 (1)_4.jpg,1,Dataset,OS: 13.4.1 | Path: .
+01 (1)_5.JPG,1,Dataset,OS: 13.4.1 | Path: .
+01 (1)_6.JPG,1,Dataset,OS: 13.3.1 | Path: .
+01 (2).jpg,1,Dataset,OS: Unknown | Path: .
+01 (2)_1.jpg,1,Dataset,OS: G960FXXS7DTB5 | Path: .
+01 (2)_2.jpg,1,Dataset,OS: G965FXXS7CSK4 | Path: .
+01 (2)_3.jpg,1,Dataset,OS: A705FXXU5BTC2 | Path: .
+01 (2)_4.jpg,1,Dataset,OS: 13.4.1 | Path: .
+01 (2)_5.JPG,1,Dataset,OS: 13.4.1 | Path: .
+01 (2)_6.JPG,1,Dataset,OS: 13.3.1 | Path: .
+01 (3).jpg,1,Dataset,OS: Unknown | Path: .
+01 (3)_1.jpg,1,Dataset,OS: G960FXXS7DTB5 | Path: .
+01 (3)_2.jpg,1,Dataset,OS: G965FXXS7CSK4 | Path: .
+01 (3)_3.jpg,1,Dataset,OS: A705FXXU5BTC2 | Path: .
+01 (3)_4.jpg,1,Dataset,OS: 13.4.1 | Path: .
+01 (3)_5.JPG,1,Dataset,OS: 13.4.1 | Path: .
+01 (3)_6.JPG,1,Dataset,OS: 13.3.1 | Path: .
+01 (4).jpg,1,Dataset,OS: Unknown | Path: .
+01 (4)_1.jpg,1,Dataset,OS: G960FXXS7DTB5 | Path: .
+01 (4)_2.jpg,1,Dataset,OS: G965FXXS7CSK4 | Path: .
+01 (4)_3.jpg,1,Dataset,OS: A705FXXU5BTC2 | Path: .
+01 (4)_4.jpg,1,Dataset,OS: 13.4.1 | Path: .
+01 (4)_5.JPG,1,Dataset,OS: 13.4.1 | Path: .
+01 (4)_6.JPG,1,Dataset,OS: 13.3.1 | Path: .
+01 (5).jpg,1,Dataset,OS: Unknown | Path: .
+01 (5)_1.jpg,1,Dataset,OS: G960FXXS7DTB5 | Path: .
+01 (5)_2.jpg,1,Dataset,OS: G965FXXS7CSK4 | Path: .
+01 (5)_3.jpg,1,Dataset,OS: A705FXXU5BTC2 | Path: .
+01 (5)_4.jpg,1,Dataset,OS: 13.4.1 | Path: .
+01 (5)_5.JPG,1,Dataset,OS: 13.4.1 | Path: .
+01 (5)_6.JPG,1,Dataset,OS: 13.3.1 | Path: .
+01 (6).jpg,1,Dataset,OS: Unknown | Path: .
+01 (6)_1.jpg,1,Dataset,OS: G960FXXS7DTB5 | Path: .
+01 (6)_2.jpg,1,Dataset,OS: G965FXXS7CSK4 | Path: .
+01 (6)_3.jpg,1,Dataset,OS: A705FXXU5BTC2 | Path: .
+01 (6)_4.jpg,1,Dataset,OS: 13.4.1 | Path: .
+01 (6)_5.JPG,1,Dataset,OS: 13.4.1 | Path: .
+01 (6)_6.JPG,1,Dataset,OS: 13.3.1 | Path: .
+01 (7).jpg,1,Dataset,OS: Unknown | Path: .
+01 (7)_1.jpg,1,Dataset,OS: G960FXXS7DTB5 | Path: .
+01 (7)_2.jpg,1,Dataset,OS: G965FXXS7CSK4 | Path: .
+01 (7)_3.jpg,1,Dataset,OS: A705FXXU5BTC2 | Path: .
+01 (7)_4.jpg,1,Dataset,OS: 13.4.1 | Path: .
+01 (7)_5.JPG,1,Dataset,OS: 13.4.1 | Path: .
+01 (7)_6.JPG,1,Dataset,OS: 13.3.1 | Path: .
+01 (8).jpg,1,Dataset,OS: Unknown | Path: .
+01 (8)_1.jpg,1,Dataset,OS: G960FXXS7DTB5 | Path: .
+01 (8)_2.jpg,1,Dataset,OS: G965FXXS7CSK4 | Path: .
+01 (8)_3.jpg,1,Dataset,OS: A705FXXU5BTC2 | Path: .
+01 (8)_4.jpg,1,Dataset,OS: 13.4.1 | Path: .
+01 (8)_5.JPG,1,Dataset,OS: 13.4.1 | Path: .
+01 (8)_6.JPG,1,Dataset,OS: 13.3.1 | Path: .
+01 (9.0).jpg,1,Dataset,OS: Unknown | Path: .
+01 (9.0)_1.jpg,1,Dataset,OS: G960FXXS7DTB5 | Path: .
+01 (9.0)_2.jpg,1,Dataset,OS: G965FXXS7CSK4 | Path: .
+01 (9.0)_3.jpg,1,Dataset,OS: A705FXXU5BTC2 | Path: .
+01 (9.0)_4.jpg,1,Dataset,OS: 13.4 | Path: .
+01 (9.0)_5.JPG,1,Dataset,OS: 13.4.1 | Path: .
+01 (9.0)_6.JPG,1,Dataset,OS: 13.3.1 | Path: .
+01 (9.1).jpg,1,Dataset,OS: Unknown | Path: .
+01 (9.1)_1.jpg,1,Dataset,OS: G960FXXS7DTB5 | Path: .
+01 (9.1)_2.jpg,1,Dataset,OS: G965FXXS7CSK4 | Path: .
+01 (9.1)_3.jpg,1,Dataset,OS: A705FXXU5BTC2 | Path: .
+01 (9.1)_4.jpg,1,Dataset,OS: 13.4 | Path: .
+01 (9.1)_5.JPG,1,Dataset,OS: 13.4.1 | Path: .
+01 (9.1)_6.JPG,1,Dataset,OS: 13.3.1 | Path: .
+img_338651249.jpg,1,Dataset,OS: Picasa | Path: .
+PORTRAIT_0050_20170718_104704_950.jpg,1,Dataset,OS: HDR+ 1.0.162266548z | Path: .
+PORTRAIT_0050_20170719_142756_707.jpg,1,Dataset,OS: HDR+ 1.0.162266548z | Path: .
+PORTRAIT_0050_20170725_182616_746.jpg,1,Dataset,OS: HDR+ 1.0.162691864z | Path: .
+PORTRAIT_0050_20170725_185728_022.jpg,1,Dataset,OS: HDR+ 1.0.162691864z | Path: .
+PORTRAIT_0050_20170806_163412_637.jpg,1,Dataset,OS: HDR+ 1.0.164138551z | Path: .
+PORTRAIT_0050_20170809_154004_802.jpg,1,Dataset,OS: HDR+ 1.0.164138551z | Path: .
+PORTRAIT_0181_20170715_124004_796.jpg,1,Dataset,OS: HDR+ 1.0.162050537z | Path: .
+PORTRAIT_0222_20170812_202647_946.jpg,1,Dataset,OS: HDR+ 1.0.163109750z | Path: .
+PORTRAIT_0289_20170809_100620_690.jpg,1,Dataset,OS: HDR+ 1.0.163537867z | Path: .
+PORTRAIT_0508_20170823_165159_189.jpg,1,Dataset,OS: HDR+ 1.0.165812133z | Path: .
+PORTRAIT_0578_20170810_204504_835.jpg,1,Dataset,OS: HDR+ 1.0.163537867z | Path: .
+PORTRAIT_0578_20170817_153638_385.jpg,1,Dataset,OS: HDR+ 1.0.165040487z | Path: .
+PORTRAIT_0578_20170817_173638_329.jpg,1,Dataset,OS: HDR+ 1.0.165040487z | Path: .
+PORTRAIT_5702_20170819_133222_151.jpg,1,Dataset,OS: HDR+ 1.0.165786234z | Path: .
+PORTRAIT_5702_20170831_121406_392.jpg,1,Dataset,OS: HDR+ 1.0.166778486z | Path: .
+PORTRAIT_5702_20170910_123953_906.jpg,1,Dataset,OS: HDR+ 1.0.167829695z | Path: .
+PORTRAIT_5702_20170910_124847_196.jpg,1,Dataset,OS: HDR+ 1.0.167829695z | Path: .
