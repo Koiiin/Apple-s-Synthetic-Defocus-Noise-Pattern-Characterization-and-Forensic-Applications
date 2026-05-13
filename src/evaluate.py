@@ -26,22 +26,34 @@ from sklearn.metrics import (
 
 def load_predictions(csv_path: Path, pred_col: str, label_col: str = "label") -> tuple[list, list, list]:
     filenames, labels, preds = [], [], []
+
     with open(csv_path, newline="") as f:
         for row in csv.DictReader(f):
-            if row.get(label_col, "") == "":
+            label_raw = row.get(label_col, "").strip()
+            pred_raw = row.get(pred_col, "").strip()
+
+            # Bỏ qua dòng không có label hoặc bị skip detector
+            if label_raw == "" or pred_raw == "":
                 continue
+
             filenames.append(row["filename"])
-            labels.append(int(row[label_col]))
-            preds.append(int(row[pred_col]))
+            labels.append(int(label_raw))
+            preds.append(int(pred_raw))
+
     return filenames, labels, preds
 
 
 def load_rho(csv_path: Path) -> dict:
     rho_map = {}
+
     with open(csv_path, newline="") as f:
         for row in csv.DictReader(f):
-            if "rho" in row and row["filename"]:
-                rho_map[row["filename"]] = float(row["rho"])
+            rho_raw = row.get("rho", "").strip()
+            filename = row.get("filename", "").strip()
+
+            if filename and rho_raw != "":
+                rho_map[filename] = float(rho_raw)
+
     return rho_map
 
 
@@ -63,14 +75,14 @@ def evaluate(pred_path: Path, baseline_path: Path | None, output_dir: Path):
     output_dir.mkdir(parents=True, exist_ok=True)
 
     # Load BP detector results
-    _, y_true, y_pred = load_predictions(pred_path, pred_col="pred_label")
+    filename, y_true, y_pred = load_predictions(pred_path, pred_col="pred_label")
     if not y_true:
         print("No labelled samples found in prediction CSV.")
         return
 
     rho_map = load_rho(pred_path)
     latencies = load_latency(pred_path)
-    y_scores = [rho_map.get(fn, 0.0) for fn in _]
+    y_scores = [rho_map.get(fn, 0.0) for fn in filename]
 
     metrics = {
         "n_samples": len(y_true),
@@ -94,7 +106,7 @@ def evaluate(pred_path: Path, baseline_path: Path | None, output_dir: Path):
                 if row.get("exif_prediction", "") != "":
                     exif_pred_map[row["filename"]] = int(row["exif_prediction"])
 
-        aligned = [(yt, exif_pred_map[fn]) for fn, yt in zip(filenames, y_true) if fn in exif_pred_map]
+        aligned = [(yt, exif_pred_map[fn]) for fn, yt in zip(filename, y_true) if fn in exif_pred_map]
         if aligned:
             y_true_b = [a[0] for a in aligned]
             y_pred_b = [a[1] for a in aligned]

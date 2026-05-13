@@ -1,0 +1,21 @@
+{
+  "n_samples": 80,
+  "n_positive": 80,
+  "bp_detector": {
+    "accuracy": 0.125,
+    "precision": 1.0,
+    "recall_tpr": 0.125,
+    "fpr": 0.0,
+    "f1": 0.2222,
+    "roc_auc": null,
+    "avg_latency_ms": 6165.4
+  },
+  "exif_baseline": {
+    "n_samples": 80,
+    "accuracy": 0.125,
+    "precision": 1.0,
+    "recall_tpr": 0.125,
+    "fpr": 0.0,
+    "f1": 0.2222
+  }
+}
