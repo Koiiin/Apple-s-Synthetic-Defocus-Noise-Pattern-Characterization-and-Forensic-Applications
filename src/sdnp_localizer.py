@@ -32,10 +32,11 @@ def localize(image_path: Path, bp_path: Path, rotation_k: int, output_dir: Path,
     # Load image (grayscale)
     I = load_image(image_path)
 
-    # Resize BP to match image if needed (scale-aware improvement)
+    # Resize BP to match image if needed (INTER_AREA when downscaling reduces aliasing vs bilinear)
     if BP.shape != I.shape:
         print(f"  [scale] BP {BP.shape} → resize to image {I.shape}")
-        BP = cv2.resize(BP, (I.shape[1], I.shape[0]), interpolation=cv2.INTER_LINEAR)
+        interp = cv2.INTER_AREA if BP.shape[0] > I.shape[0] else cv2.INTER_LINEAR
+        BP = cv2.resize(BP, (I.shape[1], I.shape[0]), interpolation=interp)
 
     # Compute NCC map and binary mask
     NCCmap, Mask = BP_driven_NCC_map(BP, I, alpha=alpha)

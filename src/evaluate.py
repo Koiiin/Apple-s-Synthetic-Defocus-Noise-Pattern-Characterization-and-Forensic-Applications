@@ -76,15 +76,54 @@ def evaluate(pred_path: Path, baseline_path: Path | None, output_dir: Path):
 
     # Load BP detector results
     filename, y_true, y_pred = load_predictions(pred_path, pred_col="pred_label")
-    if not y_true:
-        print("No labelled samples found in prediction CSV.")
-        return
 
     rho_map = load_rho(pred_path)
     latencies = load_latency(pred_path)
+
+    # ------------------------------------------------------------------
+    # SCALE-AWARE / RHO-ONLY MODE
+    # ------------------------------------------------------------------
+    if not y_true:
+        print("No hard-decision labels found. Running rho-only analysis.")
+
+        rho_values = list(rho_map.values())
+
+        if not rho_values:
+            print("No rho values found.")
+            return
+
+        metrics = {
+            "mode": "rho_only",
+            "n_samples": len(rho_values),
+            "rho_mean": round(float(np.mean(rho_values)), 6),
+            "rho_std": round(float(np.std(rho_values)), 6),
+            "rho_min": round(float(np.min(rho_values)), 6),
+            "rho_max": round(float(np.max(rho_values)), 6),
+            "avg_latency_ms": round(np.mean(latencies), 1) if latencies else None,
+            "note": (
+                "Scale-aware robustness experiment. "
+                "BP templates were resized to image resolution before NCC. "
+                "Scores are not directly comparable to paper threshold beta=0.0072."
+            ),
+        }
+
+        metrics_path = output_dir / "metrics.json"
+
+        with open(metrics_path, "w") as f:
+            json.dump(metrics, f, indent=2)
+
+        print(f"Metrics saved → {metrics_path}")
+        print(json.dumps(metrics, indent=2))
+
+        return
+
+    # ------------------------------------------------------------------
+    # NORMAL DETECTOR EVALUATION
+    # ------------------------------------------------------------------
     y_scores = [rho_map.get(fn, 0.0) for fn in filename]
 
     metrics = {
+        "mode": "hard_decision",
         "n_samples": len(y_true),
         "n_positive": int(sum(y_true)),
         "bp_detector": {
@@ -93,23 +132,31 @@ def evaluate(pred_path: Path, baseline_path: Path | None, output_dir: Path):
             "recall_tpr": round(recall_score(y_true, y_pred, zero_division=0), 4),
             "fpr": round(compute_fpr(y_true, y_pred), 4),
             "f1": round(f1_score(y_true, y_pred, zero_division=0), 4),
-            "roc_auc": round(roc_auc_score(y_true, y_scores), 4) if len(set(y_true)) > 1 else None,
+            "roc_auc": round(roc_auc_score(y_true, y_scores), 4)
+            if len(set(y_true)) > 1 else None,
             "avg_latency_ms": round(np.mean(latencies), 1) if latencies else None,
         }
     }
 
-    # EXIF baseline metrics — inner join theo filename, không dùng positional align
+    # EXIF baseline metrics — inner join theo filename
     if baseline_path and baseline_path.exists():
         exif_pred_map: dict[str, int] = {}
+
         with open(baseline_path, newline="") as bf:
             for row in csv.DictReader(bf):
                 if row.get("exif_prediction", "") != "":
                     exif_pred_map[row["filename"]] = int(row["exif_prediction"])
 
-        aligned = [(yt, exif_pred_map[fn]) for fn, yt in zip(filename, y_true) if fn in exif_pred_map]
+        aligned = [
+            (yt, exif_pred_map[fn])
+            for fn, yt in zip(filename, y_true)
+            if fn in exif_pred_map
+        ]
+
         if aligned:
             y_true_b = [a[0] for a in aligned]
             y_pred_b = [a[1] for a in aligned]
+
             metrics["exif_baseline"] = {
                 "n_samples": len(aligned),
                 "accuracy": round(accuracy_score(y_true_b, y_pred_b), 4),
@@ -121,35 +168,60 @@ def evaluate(pred_path: Path, baseline_path: Path | None, output_dir: Path):
 
     # Save metrics JSON
     metrics_path = output_dir / "metrics.json"
+
     with open(metrics_path, "w") as f:
         json.dump(metrics, f, indent=2)
+
     print(f"Metrics saved → {metrics_path}")
     print(json.dumps(metrics, indent=2))
 
-    # Confusion matrix plot
+    # Confusion matrix
     cm = confusion_matrix(y_true, y_pred, labels=[0, 1])
+
     fig, ax = plt.subplots(figsize=(4, 4))
-    ConfusionMatrixDisplay(cm, display_labels=["Non-Portrait", "Portrait"]).plot(ax=ax, colorbar=False)
+
+    ConfusionMatrixDisplay(
+        cm,
+        display_labels=["Non-Portrait", "Portrait"]
+    ).plot(ax=ax, colorbar=False)
+
     ax.set_title("BP Detector — Confusion Matrix")
+
     fig.tight_layout()
+
     cm_path = output_dir / "confusion_matrix.png"
+
     fig.savefig(str(cm_path), dpi=150)
+
     plt.close(fig)
+
     print(f"Confusion matrix → {cm_path}")
 
     # ROC curve
     if len(set(y_true)) > 1:
         fpr_arr, tpr_arr, _ = roc_curve(y_true, y_scores)
+
         fig, ax = plt.subplots(figsize=(5, 5))
-        ax.plot(fpr_arr, tpr_arr, label=f"BP Detector (AUC={metrics['bp_detector']['roc_auc']:.3f})")
+
+        ax.plot(
+            fpr_arr,
+            tpr_arr,
+            label=f"BP Detector (AUC={metrics['bp_detector']['roc_auc']:.3f})"
+        )
+
         ax.plot([0, 1], [0, 1], "k--", linewidth=0.8)
+
         ax.set_xlabel("FPR")
         ax.set_ylabel("TPR")
         ax.set_title("ROC Curve")
         ax.legend()
+
         roc_path = output_dir / "roc_curve.png"
+
         fig.savefig(str(roc_path), dpi=150)
+
         plt.close(fig)
+
         print(f"ROC curve → {roc_path}")
 
 
