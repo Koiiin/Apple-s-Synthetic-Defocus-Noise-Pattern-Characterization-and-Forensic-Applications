@@ -20,6 +20,10 @@ for entry in "${CONDITIONS[@]}"; do
   echo "=== Condition: $name ==="
   # shellcheck disable=SC2086
   python src/transform_images.py --input data/raw --output "data/processed/$name" $args
-  python src/sdnp_detector.py --images "data/processed/$name" --bp "$BP" --labels "$LABELS" --beta 0.0072 --output "results/$name/sdnp_results.csv"
+  det_flags=(--images "data/processed/$name" --bp "$BP" --labels "$LABELS" --beta 0.0072 --output "results/$name/sdnp_results.csv")
+  if [[ "$name" == resize_05 || "$name" == resize_025 ]]; then
+    det_flags+=(--scale-aware)
+  fi
+  python src/sdnp_detector.py "${det_flags[@]}"
   python src/evaluate.py --pred "results/$name/sdnp_results.csv" --baseline "results/exif_baseline.csv" --labels "$LABELS" --output "results/$name/"
 done
