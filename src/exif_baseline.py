@@ -18,8 +18,15 @@ pillow_heif.register_heif_opener()
 SUPPORTED = {".jpg", ".jpeg", ".png", ".heic"}
 
 # piexif trả về integer cho CustomRendered (0xA401).
-# Apple dùng 6 = Portrait, 7 = Portrait HDR — không phải chuỗi "Portrait".
-_CR_INT_TO_STR = {6: "Portrait", 7: "Portrait HDR"}
+# EXIF chuẩn (CIPA/JEITA) chỉ định nghĩa 0=Normal, 1=Custom.
+# Apple mở rộng riêng (không tài liệu hoá chính thức, reverse-engineered từ ExifTool):
+#   2=HDR (no original), 3=HDR (original saved), 4=HDR original,
+#   6=Panorama, 7=Portrait HDR, 8=Portrait
+# Vendor khác (Samsung, Huawei) không dùng trường này — họ dùng MakerNote riêng.
+_CR_INT_TO_STR = {
+    2: "HDR", 3: "HDR+Original", 4: "HDR-Original",
+    6: "Panorama", 7: "Portrait HDR", 8: "Portrait",
+}
 PORTRAIT_CR_VALUES = {"Portrait", "Portrait HDR"}
 
 
