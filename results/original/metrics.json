@@ -9,7 +9,7 @@
     "fpr": 0.0,
     "f1": 0.8358,
     "roc_auc": 0.9073,
-    "avg_latency_ms": 5066.9
+    "avg_latency_ms": 5621.9
   },
   "exif_baseline": {
     "n_samples": 99,

@@ -9,6 +9,6 @@
     "fpr": 0.0,
     "f1": 0.8358,
     "roc_auc": 0.8842,
-    "avg_latency_ms": 1980.8
+    "avg_latency_ms": 1900.6
   }
 }
