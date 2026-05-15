@@ -1,0 +1,10 @@
+{
+  "mode": "rho_only",
+  "n_samples": 100,
+  "rho_mean": 0.023853,
+  "rho_std": 0.038762,
+  "rho_min": 0.000853,
+  "rho_max": 0.231103,
+  "avg_latency_ms": 2828.3,
+  "note": "Scale-aware robustness experiment. BP templates were resized to image resolution before NCC. Scores are not directly comparable to paper threshold beta=0.0072."
+}

@@ -1,0 +1,22 @@
+{
+  "mode": "hard_decision",
+  "n_samples": 93,
+  "n_positive": 32,
+  "bp_detector": {
+    "accuracy": 0.957,
+    "precision": 1.0,
+    "recall_tpr": 0.875,
+    "fpr": 0.0,
+    "f1": 0.9333,
+    "roc_auc": 1.0,
+    "avg_latency_ms": 5690.7
+  },
+  "exif_baseline": {
+    "n_samples": 93,
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall_tpr": 1.0,
+    "fpr": 0.0,
+    "f1": 1.0
+  }
+}
