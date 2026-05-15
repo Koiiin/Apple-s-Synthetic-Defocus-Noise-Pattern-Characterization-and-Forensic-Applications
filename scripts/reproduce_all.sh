@@ -8,4 +8,7 @@ bash scripts/run_original.sh
 echo "=== Step 2: Robustness experiments ==="
 bash scripts/run_robustness.sh
 
-echo "=== Done. Kết quả trong results/ ==="
+echo "=== Step 3: Filter comparison ==="
+bash scripts/run_filter_comparison.sh
+
+echo "=== Done. Kết quả trong results/ và results_residual/ ==="

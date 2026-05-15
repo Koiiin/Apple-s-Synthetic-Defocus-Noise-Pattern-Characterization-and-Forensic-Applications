@@ -84,7 +84,8 @@ def _p_mat_for_shape(P_mat: np.ndarray, meta: list, out_h: int, out_w: int) -> n
 
 
 def run_detector(images_dir: Path, bp_dir: Path, labels_path: Path, beta: float, output_path: Path,
-                 no_rotation: bool = False, batch_size: int = 50, scale_aware: bool = False):
+                 no_rotation: bool = False, batch_size: int = 50, scale_aware: bool = False,
+                 filter_type: str = "box"):
     print(f"Loading BP patterns from {bp_dir} ...")
     P_mat, meta = build_P_mat_from_mat_folder(bp_dir)
     print(f"  {len(meta)} BP variants loaded (including rotations)")
@@ -99,19 +100,33 @@ def run_detector(images_dir: Path, bp_dir: Path, labels_path: Path, beta: float,
         print("  [SCALE-AWARE] BP templates resized per image before NCC; image_size column in CSV; "
               "ρ not directly comparable to paper β.")
 
+    # Build smoothing function based on filter type
+    if filter_type == "box":
+        kernel_size = 5
+        kernel = np.ones((kernel_size, kernel_size), np.float32) / (kernel_size ** 2)
+        def _smooth(img):
+            return cv2.filter2D(img, -1, kernel, borderType=cv2.BORDER_REFLECT_101)
+        print(f"  [FILTER] box 5×5 (paper default)")
+    elif filter_type == "gauss1":
+        def _smooth(img):
+            return cv2.GaussianBlur(img, (0, 0), sigmaX=1.0, borderType=cv2.BORDER_REFLECT_101)
+        print(f"  [FILTER] Gaussian σ=1.0")
+    elif filter_type == "gauss2":
+        def _smooth(img):
+            return cv2.GaussianBlur(img, (0, 0), sigmaX=2.0, borderType=cv2.BORDER_REFLECT_101)
+        print(f"  [FILTER] Gaussian σ=2.0")
+    else:
+        raise ValueError(f"Unknown filter type: {filter_type}. Use box, gauss1, or gauss2.")
+
     # Get all image paths without loading into memory
     all_images = sorted(p for p in images_dir.rglob("*") if p.is_file() and p.suffix.lower() in SUPPORTED)
     total_images = len(all_images)
     labels = load_labels(labels_path)
 
-    # 5x5 box filter — same as BP_utils.detect_BP
-    kernel_size = 5
-    kernel = np.ones((kernel_size, kernel_size), np.float32) / (kernel_size ** 2)
-
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    fieldnames = ["filename", "sha256", "label", "pred_label", "rho", "beta", "bp_ref", "rotation_k", "latency_ms"]
+    fieldnames = ["filename", "sha256", "label", "pred_label", "rho", "beta", "filter_type", "bp_ref", "rotation_k", "latency_ms"]
     if scale_aware:
-        fieldnames = ["filename", "image_size", "sha256", "label", "pred_label", "rho", "beta", "bp_ref", "rotation_k", "latency_ms"]
+        fieldnames = ["filename", "image_size", "sha256", "label", "pred_label", "rho", "beta", "filter_type", "bp_ref", "rotation_k", "latency_ms"]
 
     with open(output_path, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames)
@@ -146,6 +161,7 @@ def run_detector(images_dir: Path, bp_dir: Path, labels_path: Path, beta: float,
                         "pred_label": "",
                         "rho": "",
                         "beta": beta,
+                        "filter_type": filter_type,
                         "bp_ref": "",
                         "rotation_k": "",
                         "latency_ms": latency_ms,
@@ -154,9 +170,7 @@ def run_detector(images_dir: Path, bp_dir: Path, labels_path: Path, beta: float,
                     print(f"  SKIP {rel_name}: image size={I.shape[:2]}, expected {(BP_H, BP_W)} (use --scale-aware for other sizes)")
                     continue
 
-                W = np.float64(I) - np.float64(
-                    cv2.filter2D(np.float64(I), -1, kernel, cv2.BORDER_REFLECT_101)
-                )
+                W = np.float64(I) - np.float64(_smooth(np.float64(I)))
 
                 if scale_aware and (h_i, w_i) != (BP_H, BP_W):
                     P_use = _p_mat_for_shape(P_mat, meta, h_i, w_i)
@@ -189,6 +203,7 @@ def run_detector(images_dir: Path, bp_dir: Path, labels_path: Path, beta: float,
                         "pred_label": pred,
                         "rho": round(rho, 6),
                         "beta": beta,
+                        "filter_type": filter_type,
                         "bp_ref": bp_ref or "",
                         "rotation_k": rot_k if rot_k is not None else "",
                         "latency_ms": latency_ms,
@@ -201,6 +216,7 @@ def run_detector(images_dir: Path, bp_dir: Path, labels_path: Path, beta: float,
                         "pred_label": pred,
                         "rho": round(rho, 6),
                         "beta": beta,
+                        "filter_type": filter_type,
                         "bp_ref": bp_ref or "",
                         "rotation_k": rot_k if rot_k is not None else "",
                         "latency_ms": latency_ms,
@@ -212,7 +228,7 @@ def run_detector(images_dir: Path, bp_dir: Path, labels_path: Path, beta: float,
                     status = f"DETECTED (BP={bp_ref}, rot={rot_k})" if pred else "not detected"
                 print(f"  {rel_name}: rho={rho:.4f} → {status}  [{latency_ms} ms]")
 
-    print(f"\nResults saved → {output_path}  ({total_images} images, β={beta})")
+    print(f"\nResults saved → {output_path}  ({total_images} images, β={beta}, filter={filter_type})")
 
 
 def main():
@@ -227,10 +243,13 @@ def main():
                         help="No-rotation baseline: only test BP at 0°, skip 90°/180°/270°")
     parser.add_argument("--scale-aware", action="store_true",
                         help="Resize BP templates to each image size before NCC (robustness / non-12MP); adds image_size column")
+    parser.add_argument("--filter", choices=["box", "gauss1", "gauss2"], default="box",
+                        help="Residual filter type: box (5×5, paper default), gauss1 (σ=1.0), gauss2 (σ=2.0)")
     args = parser.parse_args()
 
     run_detector(Path(args.images), Path(args.bp), Path(args.labels), args.beta, Path(args.output),
-                 no_rotation=args.no_rotation, batch_size=args.batch_size, scale_aware=args.scale_aware)
+                 no_rotation=args.no_rotation, batch_size=args.batch_size, scale_aware=args.scale_aware,
+                 filter_type=args.filter)
 
 
 if __name__ == "__main__":
