@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SDNP Forensic Analyzer</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<!-- ─────────────────── HEADER ─────────────────── -->
+<header>
+  <div class="header-inner">
+    <div class="logo-area">
+      <div class="logo-badge">SDNP</div>
+      <div class="logo-text">
+        <h1>Forensic Analyzer</h1>
+        <p>Apple Portrait Mode Detection via Synthetic Defocus Noise Pattern</p>
+      </div>
+    </div>
+    <div class="header-status" id="header-status">
+      <span class="status-dot loading"></span>
+      <span id="status-text">Đang tải...</span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ═══════════════ SECTION 1: UPLOAD ═══════════════ -->
+  <section id="sec-upload" class="sec active">
+
+    <div class="upload-hero">
+      <div class="drop-zone" id="drop-zone">
+        <div class="drop-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="16" width="48" height="36" rx="4" stroke="currentColor" stroke-width="2.5"/>
+            <circle cx="22" cy="28" r="5" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M8 44 L20 32 L30 42 L40 30 L56 44" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M32 8 L32 24 M26 14 L32 8 L38 14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2>Kéo ảnh vào đây</h2>
+        <p class="drop-hint">hoặc <span class="link-btn" id="browse-link">nhấn để chọn file</span></p>
+        <p class="drop-formats">Hỗ trợ: JPEG · HEIC · PNG</p>
+        <input type="file" id="file-input" accept=".jpg,.jpeg,.heic,.png" />
+      </div>
+    </div>
+
+    <div id="preview-card" class="card hidden">
+      <div class="preview-inner">
+        <div class="preview-thumb">
+          <img id="preview-img" src="" alt="Preview" />
+        </div>
+        <div class="preview-meta">
+          <div class="meta-row"><span class="meta-label">File</span><span class="meta-val" id="pm-name">—</span></div>
+          <div class="meta-row"><span class="meta-label">Kích thước</span><span class="meta-val" id="pm-size">—</span></div>
+          <div class="meta-row"><span class="meta-label">Định dạng</span><span class="meta-val" id="pm-type">—</span></div>
+        </div>
+      </div>
+      <div class="preview-actions">
+        <button class="btn-ghost" id="btn-clear">Đổi ảnh</button>
+        <button class="btn-primary" id="btn-analyze">
+          <span class="btn-icon">&#9740;</span> Phân tích
+        </button>
+      </div>
+    </div>
+
+    <!-- Info cards about what the tool does -->
+    <div class="info-strip">
+      <div class="info-card">
+        <div class="info-icon">&#x1F4A1;</div>
+        <h3>BP Detection</h3>
+        <p>So sánh NCC noise residual với 7 biến thể Base Pattern (BP①–BP⑦) ở 4 góc xoay</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">&#x1F5FA;</div>
+        <h3>Localization</h3>
+        <p>Tạo NCC map block-wise để xác định vùng bokeh trong ảnh</p>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">&#x1F4CB;</div>
+        <h3>Forensic Report</h3>
+        <p>Kết luận theo ngôn ngữ xác suất/hỗ trợ, kèm EXIF metadata và SHA-256 hash</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════ SECTION 2: PROCESSING ═══════════════ -->
+  <section id="sec-processing" class="sec">
+    <div class="processing-card">
+      <div class="spinner-wrap">
+        <div class="spinner"></div>
+      </div>
+      <h2 id="proc-headline">Đang phân tích ảnh...</h2>
+      <p id="proc-sub" class="proc-sub">Quá trình này có thể mất 5–30 giây tuỳ kích thước ảnh</p>
+
+      <div class="proc-steps" id="proc-steps">
+        <div class="ps" id="ps-upload"><div class="ps-dot"></div><span>Tải ảnh lên server</span></div>
+        <div class="ps" id="ps-hash">  <div class="ps-dot"></div><span>Tính SHA-256 hash</span></div>
+        <div class="ps" id="ps-exif">  <div class="ps-dot"></div><span>Đọc metadata EXIF</span></div>
+        <div class="ps" id="ps-bp">    <div class="ps-dot"></div><span>Chạy BP detection (NCC correlation)</span></div>
+        <div class="ps" id="ps-loc">   <div class="ps-dot"></div><span>Tạo NCC map localization</span></div>
+        <div class="ps" id="ps-rep">   <div class="ps-dot"></div><span>Tạo forensic report</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SECTION 3: RESULTS ═══════════════ -->
+  <section id="sec-results" class="sec">
+
+    <!-- Verdict banner -->
+    <div class="verdict-banner" id="verdict-banner">
+      <div class="verdict-left">
+        <div class="verdict-badge" id="verdict-badge">—</div>
+        <div class="verdict-detail">
+          <div class="verdict-title" id="verdict-title">—</div>
+          <div class="verdict-file" id="verdict-file">—</div>
+        </div>
+      </div>
+      <div class="verdict-right">
+        <div class="gauge-block">
+          <div class="gauge-labels-top">
+            <span>NCC Score (ρ)</span>
+            <span class="gauge-rho-val" id="gauge-rho-val">—</span>
+          </div>
+          <div class="gauge-track" id="gauge-track">
+            <div class="gauge-fill" id="gauge-fill"></div>
+            <div class="gauge-threshold" id="gauge-threshold"></div>
+          </div>
+          <div class="gauge-labels-bot">
+            <span>0</span>
+            <span class="gauge-beta-lbl" id="gauge-beta-lbl">β=0.0072</span>
+            <span id="gauge-max-lbl">—</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results body: image + tabs -->
+    <div class="results-body">
+
+      <!-- Thumbnail panel -->
+      <div class="thumb-col" id="thumb-col">
+        <img id="result-thumb" src="" alt="Analyzed image" />
+        <div class="thumb-meta" id="thumb-meta"></div>
+      </div>
+
+      <!-- Tab panel -->
+      <div class="tab-col">
+        <div class="tab-nav" role="tablist">
+          <button class="tab-btn active" data-tab="overview"    role="tab">Overview</button>
+          <button class="tab-btn"        data-tab="exif"        role="tab">EXIF</button>
+          <button class="tab-btn"        data-tab="detection"   role="tab">BP Detection</button>
+          <button class="tab-btn"        data-tab="localization"role="tab">Localization</button>
+          <button class="tab-btn"        data-tab="report"      role="tab">Report</button>
+        </div>
+        <div class="tab-panels">
+          <div class="tab-pane active" id="tab-overview"     role="tabpanel"></div>
+          <div class="tab-pane"        id="tab-exif"         role="tabpanel"></div>
+          <div class="tab-pane"        id="tab-detection"    role="tabpanel"></div>
+          <div class="tab-pane"        id="tab-localization" role="tabpanel"></div>
+          <div class="tab-pane"        id="tab-report"       role="tabpanel"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="results-footer">
+      <button class="btn-ghost" id="btn-new">&#8592; Phân tích ảnh mới</button>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  <p>NT334.Q21.ANTT — Digital Forensics &nbsp;|&nbsp; Apple SDNP / BP Forensic Pipeline &nbsp;|&nbsp; β = 0.0072</p>
+</footer>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

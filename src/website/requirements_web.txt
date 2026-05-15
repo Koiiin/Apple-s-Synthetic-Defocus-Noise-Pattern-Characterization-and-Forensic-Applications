@@ -1,0 +1,4 @@
+# Web server dependencies (on top of requirements.txt)
+fastapi>=0.111
+uvicorn[standard]>=0.29
+python-multipart>=0.0.9
