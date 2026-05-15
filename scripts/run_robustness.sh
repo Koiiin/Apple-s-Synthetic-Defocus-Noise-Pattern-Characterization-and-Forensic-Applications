@@ -6,11 +6,11 @@ BP="data/bp"
 LABELS="data/labels.csv"
 
 CONDITIONS=(
-  "exif_stripped:--strip-exif"
-  "jpeg_q95:--jpeg-quality 95"
-  "jpeg_q80:--jpeg-quality 80"
-  "jpeg_q60:--jpeg-quality 60"
-  "resize_05:--resize 0.5"
+  # "exif_stripped:--strip-exif"
+  # "jpeg_q95:--jpeg-quality 95"
+  # "jpeg_q80:--jpeg-quality 80"
+  # "jpeg_q60:--jpeg-quality 60"
+  # "resize_05:--resize 0.5"
   "resize_025:--resize 0.25"
 )
 

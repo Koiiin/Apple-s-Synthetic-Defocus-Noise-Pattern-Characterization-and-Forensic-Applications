@@ -1,5 +1,5 @@
 # Forensic Case Report
-Generated: 2026-05-14T18:23:41.406039+00:00
+Generated: 2026-05-15T06:38:12.005836+00:00
 
 ---
 
@@ -795,69 +795,80 @@ Generated: 2026-05-14T18:23:41.406039+00:00
 
 ---
 
-## 54588806927_f5b74e5c57_o.jpg
-- SHA-256: `3b374291db1a84f1b33b9dcc2993eadb6b32a55e46ec57eacfbb5446ddb81043`
-- Size: 8430893 bytes
+## img_0211.heic
+- SHA-256: `4a086dadc6f7d062ff983ca43f292f8a3483dea2f2aa019f5209202ccc7aa7df`
+- Size: 794106 bytes
 - Ground truth label: 1
-- BP detection: not detected | rho = 0.001 | BP = —
-- EXIF: Make=Apple | Model=iPhone 12 | CustomRendered=
+- BP detection: **DETECTED** | rho = 0.059336 | BP = BP05_12MP_SLM_HEIC.mat
+- EXIF: Make=Apple | Model=iPhone 11 Pro Max | CustomRendered=Portrait
 
-> **Kết luận:** Không phát hiện dấu vết SDNP/BP trong ảnh (NCC max = 0.0010 ≤ β = 0.0072). Không đủ bằng chứng để khẳng định ảnh là Apple Portrait Mode.  Kết luận này không định danh tuyệt đối thiết bị nguồn.
+> **Kết luận:** Ảnh có dấu hiệu tương thích với Base Pattern tham chiếu 'BP05_12MP_SLM_HEIC.mat' (NCC = 0.0593 > β = 0.0072, rotation = 0°). Kết quả hỗ trợ giả thuyết ảnh đã qua pipeline Apple Portrait Mode. EXIF xác nhận: CustomRendered = 'Portrait'. Kết luận này không định danh tuyệt đối thiết bị nguồn.
 
 ---
 
-## 54588806952_8f8beec3d9_o.jpg
-- SHA-256: `03156a8df37d7752c9fc87c8e0f6fe158a2f9416b3bd78082aff274b786400e6`
-- Size: 6116982 bytes
+## img_0212.heic
+- SHA-256: `b9809b34c3e7eff1ddf00464993b888ef349680be264485cd7f94d21bac8c1cc`
+- Size: 596213 bytes
 - Ground truth label: 1
-- BP detection: not detected | rho = 0.001593 | BP = —
-- EXIF: Make=Apple | Model=iPhone 12 | CustomRendered=
+- BP detection: **DETECTED** | rho = 0.062912 | BP = BP05_12MP_SLM_HEIC.mat
+- EXIF: Make=Apple | Model=iPhone 11 Pro Max | CustomRendered=Portrait
 
-> **Kết luận:** Không phát hiện dấu vết SDNP/BP trong ảnh (NCC max = 0.0016 ≤ β = 0.0072). Không đủ bằng chứng để khẳng định ảnh là Apple Portrait Mode.  Kết luận này không định danh tuyệt đối thiết bị nguồn.
+> **Kết luận:** Ảnh có dấu hiệu tương thích với Base Pattern tham chiếu 'BP05_12MP_SLM_HEIC.mat' (NCC = 0.0629 > β = 0.0072, rotation = 0°). Kết quả hỗ trợ giả thuyết ảnh đã qua pipeline Apple Portrait Mode. EXIF xác nhận: CustomRendered = 'Portrait'. Kết luận này không định danh tuyệt đối thiết bị nguồn.
 
 ---
 
-## 54588807642_a8c5401bfb_o.jpg
-- SHA-256: `f75257048ee55dfc7cac80a4930f2c882476b531ca57c1b03ba1bba93943801f`
-- Size: 6278579 bytes
+## img_0213.heic
+- SHA-256: `86c7bcec0c110545d0836bf0a619630b072d11196245fa14706d999ee5419610`
+- Size: 700020 bytes
 - Ground truth label: 1
-- BP detection: not detected | rho = 0.001352 | BP = —
-- EXIF: Make=Apple | Model=iPhone 12 | CustomRendered=
+- BP detection: **DETECTED** | rho = 0.084248 | BP = BP05_12MP_SLM_HEIC.mat
+- EXIF: Make=Apple | Model=iPhone 11 Pro Max | CustomRendered=Portrait
 
-> **Kết luận:** Không phát hiện dấu vết SDNP/BP trong ảnh (NCC max = 0.0014 ≤ β = 0.0072). Không đủ bằng chứng để khẳng định ảnh là Apple Portrait Mode.  Kết luận này không định danh tuyệt đối thiết bị nguồn.
+> **Kết luận:** Ảnh có dấu hiệu tương thích với Base Pattern tham chiếu 'BP05_12MP_SLM_HEIC.mat' (NCC = 0.0842 > β = 0.0072, rotation = 0°). Kết quả hỗ trợ giả thuyết ảnh đã qua pipeline Apple Portrait Mode. EXIF xác nhận: CustomRendered = 'Portrait'. Kết luận này không định danh tuyệt đối thiết bị nguồn.
 
 ---
 
-## 54588807742_21e2e7ba93_o.jpg
-- SHA-256: `39b7f34cd3d0585b0b2b82de13370b4238dd0a3eb4017c0647afd4a2c6648605`
-- Size: 6458785 bytes
+## img_0214.heic
+- SHA-256: `7f7499f35c571a9aa37e6436572557b5132509590bd2c318b277022af5bea4e7`
+- Size: 726774 bytes
 - Ground truth label: 1
-- BP detection: not detected | rho = 0.001174 | BP = —
-- EXIF: Make=Apple | Model=iPhone 12 | CustomRendered=
+- BP detection: **DETECTED** | rho = 0.080823 | BP = BP05_12MP_SLM_HEIC.mat
+- EXIF: Make=Apple | Model=iPhone 11 Pro Max | CustomRendered=Portrait
 
-> **Kết luận:** Không phát hiện dấu vết SDNP/BP trong ảnh (NCC max = 0.0012 ≤ β = 0.0072). Không đủ bằng chứng để khẳng định ảnh là Apple Portrait Mode.  Kết luận này không định danh tuyệt đối thiết bị nguồn.
+> **Kết luận:** Ảnh có dấu hiệu tương thích với Base Pattern tham chiếu 'BP05_12MP_SLM_HEIC.mat' (NCC = 0.0808 > β = 0.0072, rotation = 0°). Kết quả hỗ trợ giả thuyết ảnh đã qua pipeline Apple Portrait Mode. EXIF xác nhận: CustomRendered = 'Portrait'. Kết luận này không định danh tuyệt đối thiết bị nguồn.
 
 ---
 
-## 54589686541_d0bbf41a69_o.jpg
-- SHA-256: `acc63a1806c110382e90ec59c02d430bbd5dc64605ab23dcdeb384336c17ea9d`
-- Size: 6137035 bytes
+## img_0215.heic
+- SHA-256: `e4f31d755ca91f2d43b23876c183e9cdad412e32a97456452193c6a93fecf0d3`
+- Size: 454679 bytes
 - Ground truth label: 1
-- BP detection: not detected | rho = 0.000747 | BP = —
-- EXIF: Make=Apple | Model=iPhone 12 | CustomRendered=
+- BP detection: **DETECTED** | rho = 0.120264 | BP = BP05_12MP_SLM_HEIC.mat
+- EXIF: Make=Apple | Model=iPhone 11 Pro Max | CustomRendered=Portrait
 
-> **Kết luận:** Không phát hiện dấu vết SDNP/BP trong ảnh (NCC max = 0.0007 ≤ β = 0.0072). Không đủ bằng chứng để khẳng định ảnh là Apple Portrait Mode.  Kết luận này không định danh tuyệt đối thiết bị nguồn.
+> **Kết luận:** Ảnh có dấu hiệu tương thích với Base Pattern tham chiếu 'BP05_12MP_SLM_HEIC.mat' (NCC = 0.1203 > β = 0.0072, rotation = 0°). Kết quả hỗ trợ giả thuyết ảnh đã qua pipeline Apple Portrait Mode. EXIF xác nhận: CustomRendered = 'Portrait'. Kết luận này không định danh tuyệt đối thiết bị nguồn.
 
 ---
 
-## 54589998780_6b238366df_o.jpg
-- SHA-256: `4c79732b6fc789e5f7cca0e6285778b84e6c7f64ac1575943b0585b0f36dcd98`
-- Size: 6412106 bytes
+## img_0216.heic
+- SHA-256: `2a9d53733c905b36edaca5ad3731cbf859eb71de6c08be9e5a63de17062774bd`
+- Size: 709681 bytes
 - Ground truth label: 1
-- BP detection: not detected | rho = 0.001143 | BP = —
-- EXIF: Make=Apple | Model=iPhone 12 | CustomRendered=
+- BP detection: **DETECTED** | rho = 0.068257 | BP = BP05_12MP_SLM_HEIC.mat
+- EXIF: Make=Apple | Model=iPhone 11 Pro Max | CustomRendered=Portrait
 
-> **Kết luận:** Không phát hiện dấu vết SDNP/BP trong ảnh (NCC max = 0.0011 ≤ β = 0.0072). Không đủ bằng chứng để khẳng định ảnh là Apple Portrait Mode.  Kết luận này không định danh tuyệt đối thiết bị nguồn.
+> **Kết luận:** Ảnh có dấu hiệu tương thích với Base Pattern tham chiếu 'BP05_12MP_SLM_HEIC.mat' (NCC = 0.0683 > β = 0.0072, rotation = 0°). Kết quả hỗ trợ giả thuyết ảnh đã qua pipeline Apple Portrait Mode. EXIF xác nhận: CustomRendered = 'Portrait'. Kết luận này không định danh tuyệt đối thiết bị nguồn.
+
+---
+
+## img_0217.heic
+- SHA-256: `066b989dad0b223ecbc4356157ba846faed568c48b2516533b4aa8acefa80b47`
+- Size: 845344 bytes
+- Ground truth label: 1
+- BP detection: **DETECTED** | rho = 0.013408 | BP = BP05_12MP_SLM_HEIC.mat
+- EXIF: Make=Apple | Model=iPhone 11 Pro Max | CustomRendered=Portrait
+
+> **Kết luận:** Ảnh có dấu hiệu tương thích với Base Pattern tham chiếu 'BP05_12MP_SLM_HEIC.mat' (NCC = 0.0134 > β = 0.0072, rotation = 0°). Kết quả hỗ trợ giả thuyết ảnh đã qua pipeline Apple Portrait Mode. EXIF xác nhận: CustomRendered = 'Portrait'. Kết luận này không định danh tuyệt đối thiết bị nguồn.
 
 ---
 
@@ -875,7 +886,7 @@ Generated: 2026-05-14T18:23:41.406039+00:00
 ## photo_16.jpg
 - SHA-256: `8a2be8a3271734a7dcbd22a7f9984d0d5f8aa98b81267e12750bf91b71ec1bea`
 - Size: 10300801 bytes
-- Ground truth label: 1
+- Ground truth label: 0
 - BP detection: not detected | rho = 0.000966 | BP = —
 - EXIF: Make=Apple | Model=iPhone 7 | CustomRendered=
 

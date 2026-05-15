@@ -1,14 +1,14 @@
 {
   "mode": "hard_decision",
-  "n_samples": 99,
+  "n_samples": 100,
   "n_positive": 39,
   "bp_detector": {
-    "accuracy": 0.8889,
+    "accuracy": 0.96,
     "precision": 1.0,
-    "recall_tpr": 0.7179,
+    "recall_tpr": 0.8974,
     "fpr": 0.0,
-    "f1": 0.8358,
-    "roc_auc": 0.8842,
-    "avg_latency_ms": 1900.6
+    "f1": 0.9459,
+    "roc_auc": 1.0,
+    "avg_latency_ms": 2664.0
   }
 }
