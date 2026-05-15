@@ -37,6 +37,7 @@ def sha256(path: Path) -> str:
 
 
 def load_labels(labels_path: Path) -> dict:
+    """Stem-keyed so labels.csv entry ``foo.heic`` matches processed ``foo.jpg``."""
     labels = {}
 
     if not labels_path.exists():
@@ -50,10 +51,12 @@ def load_labels(labels_path: Path) -> dict:
             if not filename:
                 continue
 
+            stem = Path(filename).stem
+
             if label_raw == "":
-                labels[filename] = ""
+                labels[stem] = ""
             else:
-                labels[filename] = int(label_raw)
+                labels[stem] = int(label_raw)
 
     return labels
 
@@ -141,7 +144,7 @@ def run_detector(images_dir: Path, bp_dir: Path, labels_path: Path, beta: float,
             for img_path in batch_images:
                 t0 = time.perf_counter()
                 rel_name = str(img_path.relative_to(images_dir))
-                label = labels.get(rel_name, "")
+                label = labels.get(img_path.stem, "")
 
                 I = load_image(img_path)
 

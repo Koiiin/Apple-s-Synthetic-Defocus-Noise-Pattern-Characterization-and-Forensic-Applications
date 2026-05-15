@@ -22,17 +22,17 @@ for entry in "${CONDITIONS[@]}"; do
   python src/transform_images.py --input data/raw --output "data/processed/$name" $args
   det_flags=(--images "data/processed/$name" --bp "$BP" --labels "$LABELS" --output "results/$name/sdnp_results.csv" --beta 0.0072)
 
+  eval_flags=(--pred "results/$name/sdnp_results.csv" --labels "$LABELS" --output "results/$name/")
+
   if [[ "$name" == "resize_05" || "$name" == "resize_025" ]]; then
     det_flags+=(--scale-aware)
   fi
   python src/sdnp_detector.py "${det_flags[@]}"
 
-  # exif_stripped: chạy exif_baseline trên ảnh đã stripped để baseline phản ánh đúng (TPR=0)
-  if [[ "$name" == "exif_stripped" ]]; then
-    python src/exif_baseline.py --input "data/processed/$name" --output "results/$name/exif_baseline_stripped.csv"
-    baseline_file="results/$name/exif_baseline_stripped.csv"
-  else
-    baseline_file="results/exif_baseline.csv"
-  fi
-  python src/evaluate.py --pred "results/$name/sdnp_results.csv" --baseline "$baseline_file" --labels "$LABELS" --output "results/$name/"
+  # Baseline runs on the processed folder so detector and baseline see the same EXIF state
+  # (strip removes it, jpeg/resize go through HEIC→JPG which can drop EXIF for HEIC inputs).
+  python src/exif_baseline.py --input "data/processed/$name" --output "results/$name/exif_baseline_processed.csv"
+  eval_flags+=(--baseline "results/$name/exif_baseline_processed.csv")
+
+  python src/evaluate.py "${eval_flags[@]}"
 done
