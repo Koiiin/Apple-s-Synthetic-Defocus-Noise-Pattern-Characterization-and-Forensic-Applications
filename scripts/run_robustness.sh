@@ -26,5 +26,13 @@ for entry in "${CONDITIONS[@]}"; do
     det_flags+=(--scale-aware)
   fi
   python src/sdnp_detector.py "${det_flags[@]}"
-  python src/evaluate.py --pred "results/$name/sdnp_results.csv" --baseline "results/exif_baseline.csv" --labels "$LABELS" --output "results/$name/"
+
+  # exif_stripped: chạy exif_baseline trên ảnh đã stripped để baseline phản ánh đúng (TPR=0)
+  if [[ "$name" == "exif_stripped" ]]; then
+    python src/exif_baseline.py --input "data/processed/$name" --output "results/$name/exif_baseline_stripped.csv"
+    baseline_file="results/$name/exif_baseline_stripped.csv"
+  else
+    baseline_file="results/exif_baseline.csv"
+  fi
+  python src/evaluate.py --pred "results/$name/sdnp_results.csv" --baseline "$baseline_file" --labels "$LABELS" --output "results/$name/"
 done
