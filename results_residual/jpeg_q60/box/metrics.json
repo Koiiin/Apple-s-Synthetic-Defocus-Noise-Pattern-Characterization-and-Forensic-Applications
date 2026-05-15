@@ -1,18 +1,28 @@
 {
   "mode": "hard_decision",
-  "n_samples": 93,
-  "n_positive": 32,
-  "bp_detector": {
-    "accuracy": 0.957,
+  "n_samples": 100,
+  "n_positive": 39,
+  "roc_auc": 0.995,
+  "avg_latency_ms": 5317.0,
+  "at_paper_beta": {
+    "beta": 0.0072,
+    "accuracy": 0.95,
     "precision": 1.0,
-    "recall_tpr": 0.875,
+    "recall_tpr": 0.8718,
     "fpr": 0.0,
-    "f1": 0.9333,
-    "roc_auc": 0.9944,
-    "avg_latency_ms": 5317.0
+    "f1": 0.9315
+  },
+  "at_calibrated_beta": {
+    "beta": 0.00562,
+    "accuracy": 0.95,
+    "precision": 1.0,
+    "recall_tpr": 0.8718,
+    "fpr": 0.0,
+    "f1": 0.9315,
+    "note": "Threshold fitted on this test set (\u03b2 = max \u03c1 over negatives). Reports upper-bound metrics at FPR=0; not for forensic decisions."
   },
   "exif_baseline": {
-    "n_samples": 93,
+    "n_samples": 100,
     "accuracy": 1.0,
     "precision": 1.0,
     "recall_tpr": 1.0,

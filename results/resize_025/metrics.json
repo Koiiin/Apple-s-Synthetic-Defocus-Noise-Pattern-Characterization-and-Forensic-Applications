@@ -1,10 +1,24 @@
 {
-  "mode": "rho_only",
+  "mode": "hard_decision",
   "n_samples": 100,
-  "rho_mean": 0.009651,
-  "rho_std": 0.013172,
-  "rho_min": 0.001156,
-  "rho_max": 0.074102,
+  "n_positive": 39,
+  "roc_auc": 0.9639,
   "avg_latency_ms": 1619.4,
-  "note": "Scale-aware robustness experiment. BP templates were resized to image resolution before NCC. Scores are not directly comparable to paper threshold beta=0.0072."
+  "at_paper_beta": {
+    "beta": 0.0072,
+    "accuracy": 0.93,
+    "precision": 1.0,
+    "recall_tpr": 0.8205,
+    "fpr": 0.0,
+    "f1": 0.9014
+  },
+  "at_calibrated_beta": {
+    "beta": 0.005512,
+    "accuracy": 0.95,
+    "precision": 1.0,
+    "recall_tpr": 0.8718,
+    "fpr": 0.0,
+    "f1": 0.9315,
+    "note": "Threshold fitted on this test set (\u03b2 = max \u03c1 over negatives). Reports upper-bound metrics at FPR=0; not for forensic decisions."
+  }
 }
