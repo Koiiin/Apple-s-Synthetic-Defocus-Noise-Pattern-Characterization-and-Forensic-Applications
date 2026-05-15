@@ -10,8 +10,8 @@ CONDITIONS=(
   "jpeg_q95:--jpeg-quality 95"
   "jpeg_q80:--jpeg-quality 80"
   "jpeg_q60:--jpeg-quality 60"
-  # "resize_05:--resize 0.5"
-  # "resize_025:--resize 0.25"
+  "resize_05:--resize 0.5"
+  "resize_025:--resize 0.25"
 )
 
 for entry in "${CONDITIONS[@]}"; do
@@ -20,6 +20,19 @@ for entry in "${CONDITIONS[@]}"; do
   echo "=== Condition: $name ==="
   # shellcheck disable=SC2086
   python src/transform_images.py --input data/raw --output "data/processed/$name" $args
-  python src/sdnp_detector.py --images "data/processed/$name" --bp "$BP" --labels "$LABELS" --beta 0.0072 --output "results/$name/sdnp_results.csv"
-  python src/evaluate.py --pred "results/$name/sdnp_results.csv" --baseline "results/exif_baseline.csv" --labels "$LABELS" --output "results/$name/"
+  det_flags=(--images "data/processed/$name" --bp "$BP" --labels "$LABELS" --output "results/$name/sdnp_results.csv" --beta 0.0072)
+
+  eval_flags=(--pred "results/$name/sdnp_results.csv" --labels "$LABELS" --output "results/$name/")
+
+  if [[ "$name" == "resize_05" || "$name" == "resize_025" ]]; then
+    det_flags+=(--scale-aware)
+  fi
+  python src/sdnp_detector.py "${det_flags[@]}"
+
+  # Baseline runs on the processed folder so detector and baseline see the same EXIF state
+  # (strip removes it, jpeg/resize go through HEIC→JPG which can drop EXIF for HEIC inputs).
+  python src/exif_baseline.py --input "data/processed/$name" --output "results/$name/exif_baseline_processed.csv"
+  eval_flags+=(--baseline "results/$name/exif_baseline_processed.csv")
+
+  python src/evaluate.py "${eval_flags[@]}"
 done

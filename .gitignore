@@ -8,16 +8,11 @@ data/processed/*
 data/bp/*.mat
 
 # Results 
-results/original/*
-results/exif_stripped/*
-results/recompressed/*
-results/resized/*
-results/no_rotation_control/*
-!results/original/.gitkeep
 !results/exif_stripped/.gitkeep
+!results/no_rotation_control/.gitkeep
+!results/original/.gitkeep
 !results/recompressed/.gitkeep
 !results/resized/.gitkeep
-!results/no_rotation_control/.gitkeep
 
 # Python
 __pycache__/
