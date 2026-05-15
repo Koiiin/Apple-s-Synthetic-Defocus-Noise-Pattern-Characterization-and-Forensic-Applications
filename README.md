@@ -138,7 +138,7 @@ bash scripts/reproduce_all.sh
   - [ ] Hệ điều hành
   - [ ] CPU/RAM/GPU nếu có
   - [ ] Python version
-  - [ ] Thư viện trong `requirements.txt`
+  - [x] Thư viện trong `requirements.txt`
   - [ ] Công cụ hỗ trợ forensic / image processing
 
 - [ ] Mô tả nguồn dữ liệu:
