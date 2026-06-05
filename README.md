@@ -13,7 +13,7 @@ Dự án phân tích nhiễu giả lập **SDNP** trong chế độ chụp Chân
 - Định vị vùng bokeh giả (localization)
 - Đánh giá ảnh hưởng của SDNP đến kỹ thuật xác thực nguồn gốc camera (**PRNU**)
 
-Pipeline mở rộng repo chính thức bằng: chain-of-custody manifest, EXIF baseline, robustness experiment, metrics đầy đủ, và forensic case report.
+Pipeline mở rộng repo chính thức bằng: chain-of-custody manifest, robustness experiment, metrics đầy đủ, và forensic case report.
 
 ---
 
@@ -23,7 +23,6 @@ Pipeline mở rộng repo chính thức bằng: chain-of-custody manifest, EXIF 
 
 **Mục tiêu của đồ án:**
 - Xây dựng detector phát hiện ảnh Apple Portrait Mode bằng Base Pattern (BP)
-- So sánh với EXIF baseline (CustomRendered tag) — thất bại khi EXIF bị xoá
 - Đánh giá độ bền (robustness) khi ảnh bị strip EXIF / recompress / resize
 
 ---
@@ -47,7 +46,6 @@ pip install -r requirements.txt
 ├── src/
 │   ├── BP_utils.py             ← Thư viện gốc từ repo chính thức (Apache 2.0)
 │   ├── forensic_manifest.py    ← SHA-256 + chain-of-custody CSV
-│   ├── exif_baseline.py        ← EXIF-only detector (baseline so sánh)
 │   ├── sdnp_detector.py        ← BP detection: NCC + 4 rotations + threshold
 │   ├── sdnp_localizer.py       ← NCC map + binary mask (localization)
 │   ├── transform_images.py     ← Strip EXIF / JPEG recompress / resize
@@ -56,13 +54,20 @@ pip install -r requirements.txt
 ├── scripts/
 │   ├── run_original.sh         ← Pipeline chính + no-rotation baseline
 │   ├── run_robustness.sh       ← Robustness experiment
+│   ├── run_filter_comparison.sh← So sánh residual filter
+│   ├── run_fpr_controls.sh     ← Đo FPR trên negative controls
 │   └── reproduce_all.sh        ← Chạy toàn bộ
 ├── data/
-│   ├── labels.csv              ← Ground truth (filename, label, source, notes)
-│   ├── raw/                    ← Ảnh gốc (không commit)
+│   ├── labels.csv              ← Ground truth cho official dataset
+│   ├── labels_official.csv     ← Bản labels riêng cho official dataset
+│   ├── labels_fpr_controls.csv ← Ground truth negative controls
+│   ├── labels_legacy.csv       ← Ground truth cũ trước khi chuyển dataset
+│   ├── raw/
+│   │   └── apple_sdnp_official/ ← Official Apple Portrait Image Dataset
 │   ├── processed/              ← Ảnh sau transform (không commit)
 │   └── bp/                     ← BP .mat files (không commit — tải từ repo gốc)
-├── results/                    ← Output của pipeline (không commit)
+├── results/                    ← Output benchmark mẫu dùng để báo cáo metrics
+├── results_residual/           ← Kết quả so sánh filter residual
 └── deliverables/
     ├── report/                 ← LaTeX report
     └── slides/                 ← Presentation
@@ -76,10 +81,7 @@ pip install -r requirements.txt
 flowchart TD
     A["📷 Ảnh nghi vấn"] --> B
 
-    B["SHA-256 Hash\nChain-of-Custody Manifest\nforensic_manifest.py"] --> C & D
-
-    C["EXIF Baseline\nCustomRendered tag?\nexif_baseline.py"] -->|Portrait / Portrait HDR| P1["EXIF: DETECTED"]
-    C -->|Không có / bị xoá| P2["EXIF: NOT DETECTED"]
+    B["SHA-256 Hash\nChain-of-Custody Manifest\nforensic_manifest.py"] --> D
 
     D["Luminance channel\nResidual: W = I − box_filter(I, 5×5)\nsdnp_detector.py"] --> E
 
@@ -91,19 +93,45 @@ flowchart TD
 
     G --> I["Localization\nNCC map → Binary Mask\nsdnp_localizer.py"]
 
-    P1 & P2 & G & H & I --> J
+    G & H & I --> J
 
     J["Evaluate\nevaluate.py\nAcc / Prec / Recall / F1 / FPR / AUC"] --> K
 
     K["Forensic Case Report\nreport_case.py\nJSON + Markdown"]
 ```
 
-**Chuẩn bị dữ liệu:** đặt ảnh vào `data/raw/`, điền `data/labels.csv`:
+**Dataset hiện tại:** project đã được chuẩn bị với official **Apple Portrait Image Dataset** từ README của repo tác giả (`dvazquezpadin/apple-sdnp`):
 
-```csv
-filename,label,source,notes
-portrait_01.jpg,1,self-captured,iPhone 14 Portrait Mode
-normal_01.jpg,0,self-captured,iPhone 14 standard
+- 560 ảnh direct-release trong ZIP chính thức.
+- 717 ảnh Flickr được tải từ `original_download_url` trong các JSON chính thức, chỉ gồm license được tác giả ghi nhận.
+- Tổng cộng: 1277 ảnh, tất cả label `1` vì đây là Apple Portrait Image Dataset.
+- Root chạy pipeline: `data/raw/apple_sdnp_official/`.
+- Labels dùng mặc định: `data/labels.csv`; bản riêng cùng nội dung: `data/labels_official.csv`.
+- Manifest SHA-256: `data/raw/apple_sdnp_official/official_manifest.csv`.
+
+**FPR negative controls:** để đo False Positive Rate, project dùng hướng tách riêng tập đối chứng từ **PrnuModernDevices**:
+
+- Nguồn official: `https://lesc.dinfo.unifi.it/PrnuModernDevices/`.
+- README của `apple-sdnp` dùng ảnh `C21/bokeh/...` từ PrnuModernDevices trong ví dụ localization, nên đây là nguồn đã được paper/repo nhắc tới.
+- Chỉ dùng `C01-C18` làm negative non-Apple controls.
+- Không dùng `C19-C22` cho FPR negative vì paper PrnuModernDevices liệt kê chúng là Apple iPhone.
+- Expected set: 450 ảnh (`18` devices × `25` ảnh), gồm `bokeh`, `flat`, `nat`.
+- Labels riêng: `data/labels_fpr_controls.csv`.
+- Manifest riêng: `data/raw/fpr_controls/PrnuModernDevices_C01_C18_manifest.csv`.
+- Completeness status: `data/raw/fpr_controls/PrnuModernDevices_C01_C18_summary.json`.
+
+Chuẩn bị/resume download FPR controls:
+
+```bash
+python3 scripts/prepare_fpr_controls.py --make-curl-config --make-url-list
+curl --parallel --parallel-max 2 --fail --location --continue-at - --create-dirs --retry 10 --retry-delay 10 --config data/raw/fpr_controls/prnu_modern_c01_c18.curl
+python3 scripts/prepare_fpr_controls.py --write-labels --write-manifest --write-summary
+```
+
+Chạy FPR controls:
+
+```bash
+bash scripts/run_fpr_controls.sh
 ```
 
 **Chạy:**
@@ -113,155 +141,60 @@ source .venv/bin/activate
 bash scripts/reproduce_all.sh
 ```
 
+`reproduce_all.sh` tái hiện benchmark positive/robustness/filter. FPR controls là bước riêng vì cần tải negative dataset trước:
+
+```bash
+bash scripts/run_fpr_controls.sh
+```
+
 ---
 
 ## 📊 Kết quả thực nghiệm
 
-*(Cập nhật sau khi chạy pipeline)*
+Ngưỡng paper: `β = 0.0072`. Với các tập chỉ có một lớp, ROC-AUC không xác định được nên ghi `N/A`.
 
-| Điều kiện | Acc | Recall/TPR | FPR | F1 | AUC |
-|-----------|-----|-----------|-----|----|-----|
-| Original | — | — | — | — | — |
-| EXIF stripped | — | — | — | — | — |
-| JPEG Q80 | — | — | — | — | — |
-| Resize 0.5 | — | — | — | — | — |
-| No-rotation baseline | — | — | — | — | — |
-| EXIF baseline | — | — | — | — | — |
+| Điều kiện | N hợp lệ | Acc | Precision | Recall/TPR | FPR | F1 | AUC | Latency TB |
+|-----------|---------:|----:|----------:|-----------:|----:|---:|----:|-----------:|
+| Original | 1144 | 0.9781 | 1.0000 | 0.9781 | 0.0000 | 0.9890 | N/A | 3238.3 ms |
+| EXIF stripped | 1260 | 0.9802 | 1.0000 | 0.9802 | 0.0000 | 0.9900 | N/A | 3293.7 ms |
+| JPEG Q95 | 1260 | 0.9802 | 1.0000 | 0.9802 | 0.0000 | 0.9900 | N/A | 3097.3 ms |
+| JPEG Q80 | 1260 | 0.9587 | 1.0000 | 0.9587 | 0.0000 | 0.9789 | N/A | 3195.7 ms |
+| JPEG Q60 | 1260 | 0.8865 | 1.0000 | 0.8865 | 0.0000 | 0.9398 | N/A | 3064.1 ms |
+| Resize 0.5 | 1260 | 0.9690 | 1.0000 | 0.9690 | 0.0000 | 0.9843 | N/A | 1883.6 ms |
+| Resize 0.25 | 1260 | 0.7905 | 1.0000 | 0.7905 | 0.0000 | 0.8830 | N/A | 964.4 ms |
+| No-rotation baseline | 1144 | 0.7360 | 1.0000 | 0.7360 | 0.0000 | 0.8479 | N/A | 975.9 ms |
+| FPR negative controls | 85 | 1.0000 | N/A | N/A | 0.0000 | N/A | N/A | 801.9 ms |
+
+Lưu ý:
+
+- `Precision` và `FPR` trong các tập positive-only không phản ánh khả năng tránh false positive, vì các tập này không có ảnh negative.
+- FPR được đo riêng trên `PrnuModernDevices C01-C18`; chỉ 85/450 ảnh khớp resolution strict với BP 12MP nên được tính hard-decision.
+- `Original` hiện dùng `.jpg` và `.heic`; một phần `.jpeg` chính thức chưa được đưa vào benchmark đã chốt để giữ nguyên kết quả cũ.
+- Resize dùng chế độ scale-aware để khảo sát suy giảm tín hiệu, không hoàn toàn tương đương điều kiện paper gốc.
 
 ---
 
-# Checklist nhiệm vụ cần làm
+# Trạng thái nghiệm thu
 
-## 1. Phần kỹ thuật
+| Hạng mục | Trạng thái | Artifact |
+|---|---|---|
+| Reproduce một phần paper | Hoàn thành | `src/sdnp_detector.py`, `scripts/reproduce_all.sh` |
+| Chain-of-custody manifest | Hoàn thành | `src/forensic_manifest.py`, `results/original/manifest.csv` |
+| Official Apple Portrait dataset | Hoàn thành | `data/labels.csv`, `data/labels_official.csv` |
+| Negative controls cho FPR | Hoàn thành | `data/labels_fpr_controls.csv`, `results/fpr_controls/` |
+| Robustness benchmark | Hoàn thành | `results/exif_stripped/`, `results/jpeg_q*/`, `results/resize_*/` |
+| Baseline/control | Hoàn thành | `results/no_rotation_control/`, `results/fpr_controls/` |
+| Filter comparison | Hoàn thành | `results_residual/comparison_summary.csv` |
+| Forensic case report | Hoàn thành | `results/original/case_report.md`, `results/original/case_report.json` |
+| Localization module | Có sẵn | `src/sdnp_localizer.py`, web demo |
+| Metrics analysis report | Hoàn thành | `deliverables/report/benchmark_results_report.md` |
 
-- [ ] Mô tả môi trường triển khai:
-  - [ ] Hệ điều hành
-  - [ ] CPU/RAM/GPU nếu có
-  - [ ] Python version
-  - [x] Thư viện trong `requirements.txt`
-  - [ ] Công cụ hỗ trợ forensic / image processing
+## Hạn chế đã ghi nhận
 
-- [ ] Mô tả nguồn dữ liệu:
-  - [ ] Ảnh Apple Portrait Mode
-  - [ ] Ảnh không Portrait / ảnh đối chứng
-  - [ ] Ảnh tự thu thập hoặc dataset công khai
-  - [ ] File `labels.csv` chứa ground truth
-
-- [ ] Tiền xử lý dữ liệu:
-  - [ ] Chuẩn hóa tên file về lowercase
-  - [ ] Lọc ảnh đúng resolution 4032×3024 hoặc 3024×4032
-  - [ ] Gán nhãn ảnh trong `labels.csv`
-  - [ ] Tạo manifest SHA-256
-  - [ ] Tạo các biến thể robustness: strip EXIF, recompress JPEG, resize
-
-- [ ] Vẽ sơ đồ pipeline:
-  - [ ] Thu thập ảnh
-  - [ ] Bảo toàn chứng cứ bằng hash
-  - [ ] Kiểm tra EXIF baseline
-  - [ ] Trích xuất residual
-  - [ ] So khớp BP bằng NCC
-  - [ ] Localization bằng NCC map / mask
-  - [ ] Đánh giá metrics
-  - [ ] Sinh forensic report
-
-- [ ] Mô tả input – processing – output:
-  - [ ] Input: folder ảnh, BP `.mat`, `labels.csv`
-  - [ ] Processing: EXIF baseline, BP detection, localization, evaluation
-  - [ ] Output: `sdnp_results.csv`, `metrics.json`, confusion matrix, ROC curve, case report
-
-- [ ] Nếu tái hiện paper:
-  - [ ] Nêu phần giữ nguyên từ paper
-  - [ ] Nêu phần đơn giản hóa
-  - [ ] Nêu phần nhóm tự bổ sung / cải tiến
-
-## 2. Phần thực nghiệm và đánh giá
-
-- [ ] Thiết kế thực nghiệm rõ ràng:
-  - [ ] Original images
-  - [ ] EXIF stripped
-  - [ ] JPEG Q95 / Q80 / Q60
-  - [ ] Resize 0.5 / 0.25
-  - [ ] No-rotation baseline
-
-- [ ] Có baseline hoặc đối chứng:
-  - [ ] EXIF-only baseline
-  - [ ] No-rotation baseline
-  - [ ] Wrong-BP hoặc random-pattern control nếu kịp
-
-- [ ] Sử dụng metrics phù hợp:
-  - [ ] Accuracy
-  - [ ] Precision
-  - [ ] Recall / TPR
-  - [ ] F1-score
-  - [ ] False Positive Rate
-  - [ ] ROC-AUC
-  - [ ] Latency per image
-  - [ ] Robustness theo từng điều kiện biến đổi ảnh
-
-- [ ] Trình bày kết quả:
-  - [ ] Bảng metrics tổng hợp
-  - [ ] Confusion matrix
-  - [ ] ROC curve
-  - [ ] Ví dụ ảnh detected / not detected
-  - [ ] Ví dụ NCC map và mask localization
-
-## 3. Phân tích forensic
-
-- [ ] Phân tích ưu điểm:
-  - [ ] Không chỉ phụ thuộc EXIF
-  - [ ] Có thể phát hiện artifact trong nội dung ảnh
-  - [ ] Có output định lượng bằng NCC/rho
-  - [ ] Có visualization bằng NCC map
-
-- [ ] Phân tích hạn chế:
-  - [ ] Phụ thuộc BP tham chiếu
-  - [ ] Phụ thuộc resolution ảnh
-  - [ ] Ảnh resize/crop mạnh có thể làm giảm hiệu quả
-  - [ ] Không định danh tuyệt đối thiết bị nguồn
-
-- [ ] Phân tích rủi ro sai lệch:
-  - [ ] False positive
-  - [ ] False negative
-  - [ ] Ảnh bị chỉnh sửa / recompress / mạng xã hội làm suy giảm dấu vết
-  - [ ] Metadata có thể bị xóa hoặc giả mạo
-
-- [ ] Phạm vi áp dụng:
-  - [ ] Phù hợp cho image forensics
-  - [ ] Phù hợp để hỗ trợ điều tra ảnh nghi vấn Apple Portrait Mode
-  - [ ] Không dùng như bằng chứng duy nhất để kết luận thiết bị nguồn
-
-## 4. Giá trị thực tiễn và khả năng mở rộng
-
-- [ ] Thảo luận giá trị với quy trình điều tra số:
-  - [ ] Hỗ trợ triage ảnh nghi vấn
-  - [ ] Hỗ trợ khi EXIF bị xóa
-  - [ ] Tạo báo cáo có hash, kết quả detection và kết luận forensic
-
-- [ ] Khả năng dùng trong lab học thuật:
-  - [ ] Có script reproduce
-  - [ ] Có dataset nhỏ tự thu thập
-  - [ ] Có metrics để so sánh
-  - [ ] Có output dễ kiểm chứng
-
-- [ ] Khả năng mở rộng:
-  - [ ] Thêm nhiều BP hơn
-  - [ ] Hỗ trợ nhiều resolution hơn
-  - [ ] Scale-aware detection
-  - [ ] Tự động sinh report đầy đủ
-  - [ ] Kết hợp PRNU masking nếu có đủ dữ liệu
-
-## 5. Checklist hoàn thiện GitHub
-
-- [ ] `README.md` mô tả đầy đủ project
-- [ ] `requirements.txt` chạy được
-- [ ] Có hướng dẫn cài đặt
-- [ ] Có hướng dẫn chạy demo
-- [ ] Có cấu trúc thư mục rõ ràng
-- [ ] Có script chạy toàn bộ pipeline
-- [ ] Có kết quả mẫu trong `results/`
-- [ ] Có report hoặc notebook phân tích kết quả
-- [ ] Có hình pipeline / workflow
-- [ ] Có phần limitations và forensic interpretation
+- Detector strict hiện ưu tiên BP 12MP, nên ảnh khác resolution bị skip nếu không chạy `--scale-aware`.
+- Benchmark đã chốt không thêm lại `.jpeg` để tránh làm thay đổi kết quả cũ.
+- FPR strict chỉ tính trên negative controls có resolution tương thích với BP hiện tại.
+- Kết quả này hỗ trợ điều tra ảnh nghi vấn Apple Portrait Mode, không phải bằng chứng duy nhất để định danh thiết bị nguồn.
 
 ---
 ## 📜 Tài liệu tham khảo
