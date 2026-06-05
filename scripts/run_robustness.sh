@@ -19,7 +19,7 @@ for entry in "${CONDITIONS[@]}"; do
   args="${entry##*:}"
   echo "=== Condition: $name ==="
   # shellcheck disable=SC2086
-  python src/transform_images.py --input data/raw --output "data/processed/$name" $args
+  python src/transform_images.py --input data/raw/apple_sdnp_official --output "data/processed/$name" $args
   det_flags=(--images "data/processed/$name" --bp "$BP" --labels "$LABELS" --output "results/$name/sdnp_results.csv" --beta 0.0072)
 
   eval_flags=(--pred "results/$name/sdnp_results.csv" --labels "$LABELS" --output "results/$name/")
@@ -28,11 +28,6 @@ for entry in "${CONDITIONS[@]}"; do
     det_flags+=(--scale-aware)
   fi
   python src/sdnp_detector.py "${det_flags[@]}"
-
-  # Baseline runs on the processed folder so detector and baseline see the same EXIF state
-  # (strip removes it, jpeg/resize go through HEIC→JPG which can drop EXIF for HEIC inputs).
-  python src/exif_baseline.py --input "data/processed/$name" --output "results/$name/exif_baseline_processed.csv"
-  eval_flags+=(--baseline "results/$name/exif_baseline_processed.csv")
 
   python src/evaluate.py "${eval_flags[@]}"
 done

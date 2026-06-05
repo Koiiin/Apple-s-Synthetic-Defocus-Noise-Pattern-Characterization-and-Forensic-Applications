@@ -90,7 +90,7 @@ def run_detector(images_dir: Path, bp_dir: Path, labels_path: Path, beta: float,
                  no_rotation: bool = False, batch_size: int = 50, scale_aware: bool = False,
                  filter_type: str = "box"):
     print(f"Loading BP patterns from {bp_dir} ...")
-    P_mat, meta = build_P_mat_from_mat_folder(bp_dir)
+    P_mat, meta = build_P_mat_from_mat_folder(bp_dir, target_shape=(BP_H, BP_W))
     print(f"  {len(meta)} BP variants loaded (including rotations)")
 
     if no_rotation:
@@ -132,7 +132,7 @@ def run_detector(images_dir: Path, bp_dir: Path, labels_path: Path, beta: float,
         fieldnames = ["filename", "image_size", "sha256", "label", "pred_label", "rho", "beta", "filter_type", "bp_ref", "rotation_k", "latency_ms"]
 
     with open(output_path, "w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(f, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
 
         # Process in batches to reduce memory usage

@@ -17,7 +17,6 @@ Usage:
 import argparse
 from pathlib import Path
 
-import piexif
 import pillow_heif
 from PIL import Image
 

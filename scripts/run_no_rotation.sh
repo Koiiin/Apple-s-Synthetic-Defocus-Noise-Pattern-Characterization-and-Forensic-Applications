@@ -5,7 +5,7 @@
 # Kỳ vọng: TPR thấp hơn full-rotation detector → chứng minh rotation test là cần thiết.
 set -euo pipefail
 
-IMAGES="data/raw"
+IMAGES="data/raw/apple_sdnp_official"
 BP="data/bp"
 LABELS="data/labels.csv"
 OUT="results/no_rotation_control"

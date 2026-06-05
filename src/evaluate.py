@@ -8,8 +8,7 @@ Reports hard-decision metrics at two thresholds:
 
 Usage:
     python src/evaluate.py --pred results/original/sdnp_results.csv \
-        --baseline results/exif_baseline.csv --labels data/labels.csv \
-        --output results/original/
+        --labels data/labels.csv --output results/original/
 """
 import argparse
 import csv
@@ -68,8 +67,8 @@ def _metrics_at_threshold(y_true: list, y_pred: list, beta: float) -> dict:
     }
 
 
-def evaluate(pred_path: Path, baseline_path: Path | None, output_dir: Path,
-             labels_path: Path | None = None, beta_paper: float = 0.0072):
+def evaluate(pred_path: Path, output_dir: Path, labels_path: Path | None = None,
+             beta_paper: float = 0.0072):
     output_dir.mkdir(parents=True, exist_ok=True)
 
     rows = load_pred_rows(pred_path)
@@ -148,33 +147,6 @@ def evaluate(pred_path: Path, baseline_path: Path | None, output_dir: Path,
             )
             metrics["at_calibrated_beta"] = calibrated
 
-    if baseline_path and baseline_path.exists():
-        exif_pred_by_stem: dict[str, int] = {}
-        with open(baseline_path, newline="") as bf:
-            for row in csv.DictReader(bf):
-                if row.get("exif_prediction", "") != "":
-                    fn = row.get("filename", "").strip()
-                    if fn:
-                        exif_pred_by_stem[Path(fn).stem] = int(row["exif_prediction"])
-
-        aligned = [
-            (yt, exif_pred_by_stem[Path(fn).stem])
-            for fn, yt in zip(filename, y_true)
-            if Path(fn).stem in exif_pred_by_stem
-        ]
-
-        if aligned:
-            y_true_b = [a[0] for a in aligned]
-            y_pred_b = [a[1] for a in aligned]
-            metrics["exif_baseline"] = {
-                "n_samples": len(aligned),
-                "accuracy": round(accuracy_score(y_true_b, y_pred_b), 4),
-                "precision": round(precision_score(y_true_b, y_pred_b, zero_division=0), 4),
-                "recall_tpr": round(recall_score(y_true_b, y_pred_b, zero_division=0), 4),
-                "fpr": round(compute_fpr(y_true_b, y_pred_b), 4),
-                "f1": round(f1_score(y_true_b, y_pred_b, zero_division=0), 4),
-            }
-
     metrics_path = output_dir / "metrics.json"
     with open(metrics_path, "w") as f:
         json.dump(metrics, f, indent=2)
@@ -209,7 +181,6 @@ def evaluate(pred_path: Path, baseline_path: Path | None, output_dir: Path,
 def main():
     parser = argparse.ArgumentParser(description="Evaluate detection metrics.")
     parser.add_argument("--pred", required=True, help="sdnp_results.csv from sdnp_detector.py")
-    parser.add_argument("--baseline", default=None, help="exif_baseline.csv (optional)")
     parser.add_argument("--labels", default=None,
                         help="Ground truth labels CSV. If provided, overrides labels in --pred via stem-based join "
                              "(fixes HEIC→JPG mismatch from transform_images.py).")
@@ -218,10 +189,8 @@ def main():
     parser.add_argument("--output", required=True, help="Output folder for metrics and plots")
     args = parser.parse_args()
 
-    baseline = Path(args.baseline) if args.baseline else None
     labels = Path(args.labels) if args.labels else None
-    evaluate(Path(args.pred), baseline, Path(args.output),
-             labels_path=labels, beta_paper=args.beta)
+    evaluate(Path(args.pred), Path(args.output), labels_path=labels, beta_paper=args.beta)
 
 
 if __name__ == "__main__":

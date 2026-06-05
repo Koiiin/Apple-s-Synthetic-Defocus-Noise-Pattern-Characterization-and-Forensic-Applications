@@ -40,7 +40,7 @@ import cv2
 from skimage.util import view_as_blocks
 from scipy.io import loadmat
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Tuple
 from PIL import Image
 import pillow_heif
 import matplotlib.pyplot as plt
@@ -102,7 +102,7 @@ def correlation_with_rows(W, P_mat):
     # Compute correlation between W and every row of P_mat
     return P @ w
 
-def build_P_mat_from_mat_folder(path):
+def build_P_mat_from_mat_folder(path, target_shape: Tuple[int, int] | None = None):
 
     # Convert path to Path object
     path = Path(path)
@@ -118,11 +118,23 @@ def build_P_mat_from_mat_folder(path):
     # Metadata describing each row in P_mat
     meta: List[Dict[str, object]] = []
 
+    skipped: List[Dict[str, object]] = []
+
     for fp in files:
 
         # Load BP from MATLAB file
         data = loadmat(fp)
         BP = data["BP"]
+
+        if target_shape is not None and tuple(BP.shape) != tuple(target_shape):
+            skipped.append(
+                {
+                    "BP_ref": fp.name,
+                    "shape": tuple(BP.shape),
+                    "target_shape": tuple(target_shape),
+                }
+            )
+            continue
 
         # Generate the four rotated versions of the BP
         for k in (0, 1, 2, 3):
@@ -141,8 +153,17 @@ def build_P_mat_from_mat_folder(path):
                 }
             )
 
+    if not rows:
+        raise ValueError(f"No BP files matched target_shape={target_shape} in {path}")
+
     # Stack all rows into a matrix
     P_mat = np.stack(rows, axis=0)
+
+    if skipped:
+        print(
+            "  Skipped BP files with incompatible shape: "
+            + ", ".join(f"{s['BP_ref']}:{s['shape']}" for s in skipped)
+        )
 
     return P_mat, meta
 

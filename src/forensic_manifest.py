@@ -38,7 +38,11 @@ def build_manifest(input_dir: Path, labels_path: Path, output_path: Path):
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=["filename", "sha256", "size_bytes", "collected_time", "source", "label", "notes"])
+        writer = csv.DictWriter(
+            f,
+            fieldnames=["filename", "sha256", "size_bytes", "collected_time", "source", "label", "notes"],
+            lineterminator="\n",
+        )
         writer.writeheader()
         for img in images:
             meta = labels.get(img.name, {})

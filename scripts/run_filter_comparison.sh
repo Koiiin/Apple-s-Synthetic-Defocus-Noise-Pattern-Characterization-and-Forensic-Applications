@@ -14,7 +14,6 @@ set -euo pipefail
 
 BP="data/bp"
 LABELS="data/labels.csv"
-BASELINE="results/exif_baseline.csv"
 OUT_ROOT="results_residual"
 NEW_FILTERS=(gauss1 gauss2)
 
@@ -47,7 +46,7 @@ copy_box_results() {
 }
 
 # =============================================================================
-# 1. Original images (data/raw)
+# 1. Original images (data/raw/apple_sdnp_official)
 # =============================================================================
 echo ""
 echo "=== [original] Copying box results ==="
@@ -57,12 +56,12 @@ for flt in "${NEW_FILTERS[@]}"; do
   echo ""
   echo "=== [original] filter=$flt ==="
   python src/sdnp_detector.py \
-    --images data/raw --bp "$BP" --labels "$LABELS" --beta 0.0072 \
+    --images data/raw/apple_sdnp_official --bp "$BP" --labels "$LABELS" --beta 0.0072 \
     --filter "$flt" \
     --output "$OUT_ROOT/original/$flt/sdnp_results.csv"
   python src/evaluate.py \
     --pred "$OUT_ROOT/original/$flt/sdnp_results.csv" \
-    --baseline "$BASELINE" --labels "$LABELS" \
+    --labels "$LABELS" \
     --output "$OUT_ROOT/original/$flt/"
 done
 
@@ -82,13 +81,6 @@ for cond in "${NON_RESIZE_CONDITIONS[@]}"; do
   echo "=== [$cond] Copying box results ==="
   copy_box_results "results/$cond" "$OUT_ROOT/$cond/box"
 
-  # For exif_stripped, use stripped baseline if available
-  if [[ "$cond" == "exif_stripped" && -f "results/exif_stripped/exif_baseline_stripped.csv" ]]; then
-    bl="results/exif_stripped/exif_baseline_stripped.csv"
-  else
-    bl="$BASELINE"
-  fi
-
   for flt in "${NEW_FILTERS[@]}"; do
     echo ""
     echo "=== [$cond] filter=$flt ==="
@@ -98,7 +90,7 @@ for cond in "${NON_RESIZE_CONDITIONS[@]}"; do
       --output "$OUT_ROOT/$cond/$flt/sdnp_results.csv"
     python src/evaluate.py \
       --pred "$OUT_ROOT/$cond/$flt/sdnp_results.csv" \
-      --baseline "$bl" --labels "$LABELS" \
+      --labels "$LABELS" \
       --output "$OUT_ROOT/$cond/$flt/"
   done
 done
@@ -128,7 +120,7 @@ for cond in "${RESIZE_CONDITIONS[@]}"; do
       --output "$OUT_ROOT/$cond/$flt/sdnp_results.csv"
     python src/evaluate.py \
       --pred "$OUT_ROOT/$cond/$flt/sdnp_results.csv" \
-      --baseline "$BASELINE" --labels "$LABELS" \
+      --labels "$LABELS" \
       --output "$OUT_ROOT/$cond/$flt/"
   done
 done

@@ -6,7 +6,7 @@ and print a formatted comparison table.
 Compatible with both metrics formats:
   1) old format: metrics["bp_detector"]
   2) new format: metrics["at_paper_beta"], metrics["at_calibrated_beta"],
-                 metrics["exif_baseline"], top-level roc_auc / avg_latency_ms
+                 top-level roc_auc / avg_latency_ms
 
 Usage:
     python src/compare_filters.py \
@@ -136,14 +136,6 @@ def extract_metrics(metrics: dict) -> dict:
         row["calibrated_fpr"] = _to_float(calibrated.get("fpr"))
         row["calibrated_f1"] = _to_float(calibrated.get("f1"))
 
-    exif = metrics.get("exif_baseline") or {}
-    if exif:
-        row["exif_accuracy"] = _to_float(exif.get("accuracy"))
-        row["exif_precision"] = _to_float(exif.get("precision"))
-        row["exif_recall_tpr"] = _to_float(exif.get("recall_tpr"))
-        row["exif_fpr"] = _to_float(exif.get("fpr"))
-        row["exif_f1"] = _to_float(exif.get("f1"))
-
     return row
 
 
@@ -215,13 +207,17 @@ def main():
         "avg_latency_ms",
         "calibrated_beta", "calibrated_accuracy", "calibrated_precision",
         "calibrated_recall_tpr", "calibrated_fpr", "calibrated_f1",
-        "exif_accuracy", "exif_precision", "exif_recall_tpr", "exif_fpr", "exif_f1",
         "rho_mean", "rho_std", "rho_portrait_mean", "rho_nonportrait_mean",
     ]
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+        writer = csv.DictWriter(
+            f,
+            fieldnames=fieldnames,
+            extrasaction="ignore",
+            lineterminator="\n",
+        )
         writer.writeheader()
         writer.writerows(rows)
 

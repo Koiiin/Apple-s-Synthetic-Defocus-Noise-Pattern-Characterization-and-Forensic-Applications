@@ -1,12 +1,6 @@
 """
-exif_baseline.py
-EXIF-only detector: predict Portrait nếu CustomRendered == "Portrait" hoặc "Portrait HDR".
-
-Usage:
-    python src/exif_baseline.py --input data/raw --output results/exif_baseline.csv
+EXIF metadata helpers used by the website.
 """
-import argparse
-import csv
 from pathlib import Path
 
 import piexif
@@ -15,11 +9,9 @@ from PIL import Image
 
 pillow_heif.register_heif_opener()
 
-SUPPORTED = {".jpg", ".jpeg", ".png", ".heic"}
-
 # piexif trả về integer cho CustomRendered (0xA401).
 # EXIF chuẩn (CIPA/JEITA) chỉ định nghĩa 0=Normal, 1=Custom.
-# Apple mở rộng riêng (không tài liệu hoá chính thức, reverse-engineered từ ExifTool):
+# Apple mở rộng riêng, không tài liệu hoá chính thức:
 #   2=HDR (no original), 3=HDR (original saved), 4=HDR original,
 #   6=Panorama, 7=Portrait HDR, 8=Portrait
 # Vendor khác (Samsung, Huawei) không dùng trường này — họ dùng MakerNote riêng.
@@ -27,7 +19,6 @@ _CR_INT_TO_STR = {
     2: "HDR", 3: "HDR+Original", 4: "HDR-Original",
     6: "Panorama", 7: "Portrait HDR", 8: "Portrait",
 }
-PORTRAIT_CR_VALUES = {"Portrait", "Portrait HDR"}
 
 
 def read_custom_rendered(path: Path) -> str | None:
@@ -60,40 +51,3 @@ def read_make_model(path: Path) -> tuple[str, str]:
         return make, model
     except Exception:
         return "", ""
-
-
-def run_exif_baseline(input_dir: Path, output_path: Path):
-    images = sorted(p for p in input_dir.rglob("*") if p.is_file() and p.suffix.lower() in SUPPORTED)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-
-    with open(output_path, "w", newline="") as f:
-        writer = csv.DictWriter(f, fieldnames=["filename", "exif_make", "exif_model", "custom_rendered", "exif_prediction"])
-        writer.writeheader()
-        for img in images:
-            make, model = read_make_model(img)
-            cr = read_custom_rendered(img)
-            pred = 1 if (cr and cr in PORTRAIT_CR_VALUES) else 0
-            writer.writerow({
-                "filename": str(img.relative_to(input_dir)),
-                "exif_make": make,
-                "exif_model": model,
-                "custom_rendered": cr or "",
-                "exif_prediction": pred,
-            })
-            status = "Portrait" if pred else "non-Portrait"
-            print(f"  {img.name}: CustomRendered={cr!r} → {status}")
-
-    print(f"\nEXIF baseline saved → {output_path}  ({len(images)} images)")
-
-
-def main():
-    parser = argparse.ArgumentParser(description="EXIF-only Portrait Mode detector.")
-    parser.add_argument("--input", required=True, help="Folder containing images")
-    parser.add_argument("--output", default="results/exif_baseline.csv", help="Output CSV")
-    args = parser.parse_args()
-
-    run_exif_baseline(Path(args.input), Path(args.output))
-
-
-if __name__ == "__main__":
-    main()
