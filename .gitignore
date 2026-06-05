@@ -7,7 +7,8 @@ data/processed/*
 # BP .mat files 
 data/bp/*.mat
 
-# Results 
+# Result directories are intentionally tracked when they contain benchmark metrics.
+# Keep empty result directories available in fresh clones.
 !results/exif_stripped/.gitkeep
 !results/no_rotation_control/.gitkeep
 !results/original/.gitkeep
