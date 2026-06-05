@@ -37,6 +37,21 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## 🧪 Môi trường benchmark
+
+Các metrics trong repo được tạo trên môi trường sau:
+
+| Thành phần | Giá trị |
+|---|---|
+| OS | Ubuntu 24.04.4 LTS |
+| CPU | 11th Gen Intel Core i7-11800H @ 2.30GHz |
+| Core/Thread | 8 cores / 16 threads |
+| RAM | 15 GiB |
+| Swap | 4 GiB |
+| Python | 3.14.4 (`.venv`) |
+| Thư viện chính | NumPy, OpenCV, SciPy, scikit-image, Pillow, pillow-heif, Matplotlib, pandas, scikit-learn |
+| Web demo | FastAPI, Uvicorn, python-multipart |
+
 ---
 
 ## 🗂 Cấu trúc thư mục
@@ -170,6 +185,7 @@ Lưu ý:
 - `Precision` và `FPR` trong các tập positive-only không phản ánh khả năng tránh false positive, vì các tập này không có ảnh negative.
 - FPR được đo riêng trên `PrnuModernDevices C01-C18`; chỉ 85/450 ảnh khớp resolution strict với BP 12MP nên được tính hard-decision.
 - `Original` hiện dùng `.jpg` và `.heic`; một phần `.jpeg` chính thức chưa được đưa vào benchmark đã chốt để giữ nguyên kết quả cũ.
+- Processed benchmark có 1260 ảnh vì một số ảnh raw trùng filename stem; khi transform sang `.jpg`, các stem trùng bị overwrite.
 - Resize dùng chế độ scale-aware để khảo sát suy giảm tín hiệu, không hoàn toàn tương đương điều kiện paper gốc.
 
 ---
@@ -193,6 +209,7 @@ Lưu ý:
 
 - Detector strict hiện ưu tiên BP 12MP, nên ảnh khác resolution bị skip nếu không chạy `--scale-aware`.
 - Benchmark đã chốt không thêm lại `.jpeg` để tránh làm thay đổi kết quả cũ.
+- Processed benchmark có 1260 ảnh thay vì 1277 do duplicate stem overwrite trong bước transform.
 - FPR strict chỉ tính trên negative controls có resolution tương thích với BP hiện tại.
 - Kết quả này hỗ trợ điều tra ảnh nghi vấn Apple Portrait Mode, không phải bằng chứng duy nhất để định danh thiết bị nguồn.
 
